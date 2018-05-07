@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+	* {
+		margin:0;
+		padding:0;
+		text-decoration:none;
+	}
+	#containter {
+		margin:0 auto;
+		width:600px;
+		height:400px;
+		border:3px solid #333;
+		overflow:hidden;
+		position:relative;
+	}
+	#list {
+		position:absolute;
+		width:4200px;
+		height:400px;
+		z-index:1;
+		transition:1s all linear;
+	}
+	#list img {
+		float:left;
+		width:600px;
+		height:400px;
+		
+	}
+	.arrow {
+		position:absolute;
+		top:180px;
+		width:40px;
+		height:40px;
+		font-size:36px;
+		font-weight:bold;
+		line-height:36px;
+		text-align:center;
+		color:#666;		
+		z-index:2;
+		background:rgba(0,0,0,0.3);
+		cursor:pointer;
+		display:none;
+	}
+	.arrow:hover {
+		background:rgba(0,0,0,0.7);	
+		color:#eee;
+	}
+	#containter:hover .arrow {
+		display:block;
+	}
+	#left {
+		left:20px;
+	}
+	#right {
+		right:20px;
+	}
+	#button {
+		position:absolute;
+		z-index:2;
+		list-style:none;
+		font-size:20px;
+		top:350px;
+		left:270px;
+	}
+	#button li {
+		color:#999;
+		float:left;
+		margin:0 0 0 5px;		
+		padding:0;
+		cursor:pointer;
+	}
+	#button .active {
+		color:red;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var index = 1;
+		var list = document.getElementById("list");
+		var left = document.getElementById("left");
+		var right = document.getElementById("right");
+		//根据偏移量来切换图片
+		function animate(offset){
+			var netLeft = parseInt(list.style.left) + offset;
+			if(netLeft > -600){
+				list.style.left = -3000 + "px";
+			}else if(netLeft < -3000){
+				list.style.left = -600 + "px";
+			}else{
+				list.style.left = netLeft + "px";
+			}
+		}
+		left.onclick = function(){
+			index -= 1;
+			if(index < 1){
+				index = 5;
+			}
+			
+			buttonShow();
+			animate(600);
+		}
+		right.onclick = function(){
+			index += 1;
+			if(index > 5){
+				index = 1;
+			}
+			buttonShow();
+			animate(-600);
+		}
+		//设置定时器
+		var timer;
+		function play() {
+			timer = setInterval(function(){
+				left.onclick();	
+			},2000);
+		}
+		play();
+		
+		//清楚定时器
+		function clear() {
+			clearInterval(timer);
+		}
+		var containter = document.getElementById("containter");
+		containter.onmouseover = clear;
+		containter.onmouseout = play;
+		
+		var aLi = document.getElementsByTagName('li');
+		function buttonShow(){
+			for(var i=0; i<aLi.length; i++){
+				if(aLi[i].className == "active"){
+					aLi[i].className = "";
+				}				
+			}
+			aLi[index - 1].className = "active";
+		}
+		
+		
+		for(var i=0; i<aLi.length; i++){
+			(function(i){
+				aLi[i].onclick = function(){
+					var childIndex = this.getAttribute("index");
+					var offset = 600 * (index - childIndex);
+					animate(offset);
+					index = childIndex;
+					buttonShow();
+				}
+			})(i)
+			
+		}
+	}
+</script>
+<body>
+	<div id="containter">
+    	<div id="list" style="left:-600px;">
+            <img src="img/5.jpg" alt="1"/>
+            <img src="img/1.jpg" alt="1"/>
+            <img src="img/2.jpg" alt="2"/>
+            <img src="img/3.jpg" alt="3"/>
+            <img src="img/4.jpg" alt="4"/>
+            <img src="img/5.jpg" alt="5"/>
+            <img src="img/1.jpg" alt="5"/>
+        </div>
+        <ul id="button">
+        	<li index="1" class="active">●</li>
+            <li index="2">●</li>
+            <li index="3">●</li>
+            <li index="4">●</li>
+            <li index="5">●</li>
+        </ul>
+        <a href="javascript:;" id="left" class="arrow">&lt;</a>
+        <a href="javascript:;" id="right" class="arrow">&gt;</a>
+    </div>
+</body>
+</html>

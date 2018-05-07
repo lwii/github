@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	body,ul,li{
+		margin:0;
+		padding:0;
+	}
+	ul,li{
+		list-style:none;
+	}
+	#box{
+		width:500px;
+		height:300px;
+		border:1px solid #333;
+		overflow:hidden;
+		margin:0 auto;
+		position:relative;
+	}
+	#box ul {
+		border:1px solid yellow;
+		height:300px;
+		width:3500px;
+		position:absolute;
+		left:-500px;
+		z-index:1;
+	}
+	#box ul li{
+		float:left;
+		width:500px;
+		height:300px;
+		z-index:2;
+	}
+	#box span {
+		display:block;
+		width:50px;
+		height:50px;
+		font-size:50px;
+		line-height:45px;
+		text-align:center;
+		border:1px solid #333;
+		border-radius:7px;
+		color:#999;
+		float:left;
+		position:absolute;
+		top:40%;
+		left:15px;
+		z-index:3;
+		cursor:pointer;
+		
+	}
+	#box span:nth-of-type(1){
+		left:10px;
+	}
+	#box span:nth-of-type(2){
+		left:88%;;
+	}
+	#box span:hover{
+		color:#eee;
+	}
+</style>
+<script>
+	window.onload = function(){
+		function getCss(obj,name){
+			if(obj.currentStyle){
+				return obj.currentStyle[name];
+			}else{
+				return getComputedStyle(obj)[name];
+			}
+		}
+		var box = document.querySelector("#box");
+		var ul = document.querySelectorAll("ul")[0];
+		var lis = document. ("li");
+		var aSpan = document.getElementsByTagName("span");
+		var index = 1;
+		var width = getCss(box,"width");
+		width = width.replace("px","");
+		
+		aSpan[1].onclick = function(){
+			clear();
+			
+		}
+		
+		function changPosition(value){
+			ul.style.left = value + "px";
+		}
+		
+		function move(direction){
+			var left = getCss(ul,"left");
+			left = left.replace("px","");//把left值后面的px替换为空
+			var timer = setInterval(function(){
+				if(direction == "left"){
+					left --;
+				}else if(direction == "right"){
+					left ++;
+				}
+				if(left == -(lis.length - 1) * width){
+					left = -width;
+				}
+				if(left == 0){
+					left = -(lis.length - 2)*width;					
+				}
+				if(left % width == 0){
+					clearInterval(timer);
+				}
+				changPosition(left);
+			},1);
+		}
+		begin();
+		//设置定时器
+		var timer1
+		function begin(){
+			timer1 = setInterval(function(){
+				move("right")
+			},3000);
+		}
+		//清理定时器
+		function clear(){
+			clearInterval(timer1);
+		}
+	}
+</script>
+</head>
+
+<body>
+	<div id="box">
+    	<ul>
+       	 	<li style="background:url(img/p5.jpg)"></li>
+        	<li style="background:url(img/p1.jpg)">1</li>
+            <li style="background:url(img/p2.jpg)">2</li>
+            <li style="background:url(img/p3.jpg)">3</li>
+            <li style="background:url(img/p4.jpg)">4</li>
+            <li style="background:url(img/p5.jpg)">5</li>
+            <li style="background:url(img/p1.jpg)"></li>
+        </ul>
+        <span><</span>
+   		<span>></span>
+               
+    </div>
+    
+</body>
+</html>

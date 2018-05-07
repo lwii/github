@@ -1,0 +1,49 @@
+body{
+	margin:0;
+	padding:0;
+}
+#box{
+	width:100px;
+	height:100px;
+	position:absolute;
+	top:100px;
+	left:100px;
+	background:pink;
+	opacity:1;
+	filter:alpha(opacity=100);
+}
+#aaa{
+	width:300px;
+	height:500px;
+	background:red;
+}
+/*
+.a{
+	color:red;
+}
+.b{
+	background : #ccc;
+}
+.c{
+	font-weight:bold;
+}
+.d{
+	text-decoration:underline;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

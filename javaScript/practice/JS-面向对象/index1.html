@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	#box {
+		width:500px;
+		height:500px;
+		border:1px solid red;
+		margin:0 auto;
+		position:relative;
+	}
+	#tager {
+		width:100px;
+		height:50px;
+		background:blue;
+		position:absolute;
+		top:0;
+		left:200px;
+	}
+	.bullet {
+		width:20px;
+		height:20px;
+		border-radius:50%;
+		background:red;
+		position:absolute;
+		top:480px;
+		left:240px;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var box = document.querySelector("#box");
+		var tag = document.querySelector("#tager");
+		
+		tag.boole = 100;
+		tag.isdie = false;
+		function Bullet(obj){
+			this.div = document.createElement("div");
+			this.div.className = "bullet";
+			this.add = function(){
+				obj.appendChild(this.div);
+			}
+			
+			this.move = function(){
+				var bulletTop = this.div.offsetTop;
+				var _this = this;
+				console.log(this);
+				var timer = setInterval(function(){
+					bulletTop -= 10;
+					_this.div.style.top = bulletTop + "px";
+					var num = tag.offsetTop + tag.offsetHeight;
+					if(bulletTop < num){
+						tag.boole -= 10;
+						clearInterval(timer);
+						_this.div.remove();
+						if(tag.boole <= 0 && tag.isdie == false){
+							tag.isdie = true;
+							tag.remove();
+							alert("死了");
+						}
+					}
+				},100);
+			}
+			this.add();
+		}
+		box.onclick = function(){
+			var bullet = new Bullet(this);
+			bullet.move();
+		}
+	}
+</script>
+</head>
+<body>
+	<div id="box">
+    	<div id="tager"></div>
+    </div>
+</body>
+</html>

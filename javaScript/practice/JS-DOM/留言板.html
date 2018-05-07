@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>留言板</title>
+<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	#box {
+		width:500px;
+		border:1px solid #eee;
+		margin:0 auto;
+		padding:10px;
+		background:#F7F7F7;
+		
+	}
+	#box input {
+		width:400px;
+		height:30px;
+		border:1px solid #999;
+		margin:10px;
+	}
+	#box textarea {
+		width:400px;
+		height:100px;
+		border:1px solid #999;
+		margin-left:10px;
+		vertical-align:top;
+	}
+	#box span {
+		display:block;
+		width:150px;
+		height:30px;
+		border:1px solid #999;
+		line-height:30px;
+		text-align:center;
+		cursor:pointer;
+		margin:10px 0 0 64px;
+	}
+	#box .show div {
+		position:relative;
+	}
+	#box .show div h6 {
+		width:470px;
+		font-size:13px;
+		background:#ECECEC;
+		text-indent:20px;
+		height:30px;
+		line-height:30px;
+	}
+	#box .show div p {
+		font-size:12px;
+		text-indent:3em;
+		
+	}
+	#box .show div a {
+		width:25px;
+		position:absolute;
+		top:0;
+		left:470px;
+		font-size:12px;
+		color:blue;
+		background:#ECECEC;
+		height:30px;
+		line-height:30px;
+		cursor:pointer;
+	}
+	#box .show div a:hover {
+		color:red;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var aSpan = document.querySelector("span");
+		var show = document.querySelector(".show");
+		var num = 0;
+		function createDiv(obj,obj1,obj2){
+			var h6 = document.createElement("h6");
+			h6.innerHTML = obj1.value;
+			obj.appendChild(h6);
+			 
+			var a = document.createElement("a");
+			a.innerHTML = "删除";
+			a.style[onclick] = "asd";
+			obj.appendChild(a);
+			 
+			var p = document.createElement("p");
+			p.innerHTML = obj2.value;
+			obj.appendChild(p);
+			
+		}
+		
+		aSpan.onclick = function(){
+			var title = document.querySelector("input");
+			var content = document.querySelector("textarea");
+			if(title.value == "" || content.value == ""){
+				alert("标题或内容不能为空,打点字吧");
+			}else{
+				var div = document.createElement("div"); 
+				createDiv(div,title,content);
+				show.appendChild(div);
+			}
+			var myDiv = show.querySelectorAll("div");
+			removeDiv(myDiv);
+		}
+		
+		//删除
+		function removeDiv(obj){
+			for(var i = 0; i < obj.length; i++){
+				var a = obj[i].querySelector("a");
+				a.onclick = function(){
+					show.removeChild(this.parentNode);
+				}
+			}
+		}
+		
+	}
+</script>
+</head>
+<body>
+	<div id="box">
+         标 题：<input type="text" name="" value=""/><br />
+         内 容：<textarea name="" value=""></textarea><br />
+         <span>提交</span>    
+         <h2>显示留言</h2>		
+        <div class="show">        	
+        </div>
+    </div>
+</body>
+</html>

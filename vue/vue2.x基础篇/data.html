@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="box">
+    <my-photo></my-photo>
+    <my-photo></my-photo>
+    <my-photo></my-photo>
+    <my-photo></my-photo>
+    <my-photo></my-photo>
+    <my-photo></my-photo>
+</div>
+<template id="photo">
+    <div>
+        <button @click="con += 1">你点击了{{con}}次</button>
+
+    </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+   /* let data = {
+                con:0,
+            };*/
+    Vue.component("my-photo",{
+        template:"#photo",
+        data:function(){
+            return {
+                con:0,
+            }
+        },
+    });
+   new Vue({
+       el : "#box",
+
+   });
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>事件冒泡和监听</title>
+<style>
+	#box {
+		width:300px;
+		height:300px;
+		position:relative;
+		background:red;
+	}
+	#box1 {
+		width:200px;
+		height:200px;
+		background:pink;
+		position:absolute;
+		top:50px;
+		left:50px;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var box = document.querySelector("#box");
+		var p = document.querySelector("#box1");
+		var body1 = document.body;
+		
+		/*
+		//事件冒泡以及阻止事件冒泡
+		box.onclick = function(){
+			alert("卧室box");
+		}
+		box1.onclick = function(e){
+			var ev = e || window.event;		//阻止事件冒泡
+			if(ev.stopProdagation){			//W3C
+				ev.stopProdagation();
+			}else{
+				ev.cancelBubble = true;		//IE
+			}
+			alert("卧室box1");
+		}
+		body1.onclick = function(){
+			alert("卧室body");
+		}
+		*/
+		
+		//事件监听以及删除事件监听
+		function first(){
+			alert(this);
+		}
+		if(box1.addEventListener){						//W3C
+			p.addEventListener("click",first,false);
+			box.addEventListener("click",first,false);
+			body1.addEventListener("click",first,false);
+		}else{											//IE
+			p.attachEvent("onclick",first);
+			box.attachEvent("onclick",first);
+			body1.attachEvent("onclick",first);
+		}
+		
+		
+		box.removeEventListener("click",first);		//w3c
+		box.detachEvent("onclick",first);
+		
+		
+		
+	}
+</script>
+</head>
+<body>
+	<div id="box">
+    	<p id="box1"></p>
+    </div>
+</body>
+</html>

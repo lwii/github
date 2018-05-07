@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            margin:150px;
+        }
+        #canvas {
+            box-shadow: 0 0 20px #000;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas">当前版本不支持</canvas>
+</body>
+<script src="js/underscore.js"></script>
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = 1000;
+    canvas.height = 600;
+    canvas.style.background = "#000";
+    //创建小球的类
+    class Ball {
+        constructor(x,y,color){
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.r = 40;
+
+            //量的变化
+            this.dx = _.random(-5,5);
+            this.dy = _.random(-5,5);
+            this.dr = _.random(1,3);
+        }
+        //绘制小球
+        render(){
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+        }
+        //移动小球
+        upDate(){
+            this.x += this.dx;
+            this.y += this.dy;
+            this.r -= this.dr;
+            if(this.r < 0 ){
+                this.r = 0;
+            }
+        }
+    }
+   /* //创建会移动小球的类
+    class MoveBall extends Ball{       // MoveBall的类继承Ball类
+        constructor(x,y,color){
+            super(x,y,color);
+            //量的变化
+            this.dx = _.random(-5,5);
+            this.dy = _.random(-5,5);
+            this.dr = _.random(1,3);
+        }
+        upDate(){
+            this.x += this.dx;
+            this.y += this.dy;
+            this.r -= this.dr;
+            if(this.r < 0 ){
+                this.r = 0;
+            }
+        }
+    }
+    */
+    //实例化小球
+    let ballArr = [];
+    let colorArr = ['red','green','pink','yellow','blue','purple','white','orange','brown'];
+    //监听鼠标移动
+    canvas.addEventListener('mousemove',function(e){
+        //let ev = e || window.event;
+        ballArr.push(new Ball(e.offsetX, e.offsetY,colorArr[_.random(0,colorArr.length - 1)]));
+    });
+    //开启定时器
+    setInterval(function(){
+        //清屏
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+       //绘制小球
+        for(let i=0; i<ballArr.length; i++){
+            ballArr[i].render();
+            ballArr[i].upDate();
+        }
+    },50)
+</script>
+</html>

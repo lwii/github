@@ -1,0 +1,143 @@
+﻿
+body {
+	width:100%;
+	height:100%;
+	position:relative;
+	border:1px solid red;
+	prespective:300px;
+}
+body,ul,li {
+	margin: 0;
+	padding: 0;
+}
+ul {
+	list-style: outside none none;
+} 
+/*-----------3D变换-----------------*/
+#box1 {
+	width:100px;
+	height:100px;	
+	margin:400px auto;
+	transition:2s;
+	position:relative;
+	transform-origin:center center -50px;
+	transform-style:preserve-3d;
+}
+#box1 div {
+	position:absolute;
+	width:100px;
+	height:100px;
+	background:red;
+	text-align:center;
+}
+#box1 div:nth-of-type(1){
+	top:0px;
+	background:green;
+	transform-origin:bottom;
+	transform:rotateX(90deg);
+}
+#box1 div:nth-of-type(2){
+	left:0px;
+	background:yellow;
+	transform-origin:right;
+	transform:rotateY(-90deg);
+}
+#box1 div:nth-of-type(3){
+	background:red;
+}
+#box1 div:nth-of-type(4){
+	right:0px;
+	background:blue;
+	transform-origin:left;
+	transform:rotateY(90deg);
+}
+#box1 div:nth-of-type(5){
+	bottom:0px;
+	background:pink;
+	transform-origin:top;
+	transform:rotateX(-90deg);
+}
+#box1 div:nth-of-type(6){
+	background:#eee;	
+	transform:translateZ(-100px) rotate(-180deg);
+}
+body:hover #box1 {
+	transform:rotateX(720deg)  rotate(540deg);
+}
+/*-----------3D变换 关键帧-----------------*/
+#box2 {
+	width:700px;
+	height:700px;
+	border:1px solid red;
+	position:absolute;
+	top:0px;
+	left:100px;
+}
+#box2 div {
+	width:50px;
+	height:50px;
+	background:red;
+	position:absolute;
+	top:0;
+	left:0px;
+	animation:4s zou ease infinite;
+}
+@keyframes zou {
+	1% {left:0;}
+	25% {left:650px;top:0px;}
+	50% {left:650px;top:650px;}
+	75% {left:0;top:650px;}
+	100% {left:0;top:0;}
+} 
+#box {
+	width:100px;
+	height:150px;
+	font-size: 11px;
+	float:left;	
+	position:absolute;
+	top:100px;
+	left:100px;
+	transition:5s all ease;
+}
+
+body:hover #box {
+	left:1000px;
+	transform:translate(100px,200px) rotate(360deg) scale(2) skew(60deg,-30deg);
+}
+#box ul {
+	background:linear-gradient(to right bottom,rgba(178,194,213,1),rgba(241, 235, 215, 1)); 
+	border-radius: 3px;
+	border: 1px solid #999;	
+	
+}
+#box ul li {	
+	width:100px;
+	height: 16px;
+	line-height: 16px;
+	text-indent: 15px;	
+}
+#box ul li:hover {
+	background:blue;
+	color:#fff;
+}
+#box .li1 {
+	height: 22px;
+	line-height: 22px;
+	border-bottom: 1px solid #999;
+}
+#box .li2 {
+	height: 22px;
+	line-height: 22px;
+	border-bottom: 1px solid #999;
+}
+#box .li3 {
+	height: 22px;
+	line-height: 22px;
+	border-bottom: 1px solid #999;
+}
+#box .li4 {
+	padding-top:2px;
+}
+#box .li8 {
+	padding-bottom: 2px;
+}

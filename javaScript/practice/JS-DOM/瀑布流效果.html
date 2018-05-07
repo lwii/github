@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>瀑布流</title>
+<style>
+	ul,li {
+		margin:0;
+		padding:0;
+		list-style:none;
+	}
+	#box {
+		width:800px;
+		border:1px solid red;
+	}
+	#box::after{
+		content:"";
+		display:block;
+		clear:both;
+	}
+	#box ul {
+		width:200px;
+		float:left;
+	}
+	#box li {
+		width:200px;
+		margin:5px 0;
+		border:1px solid black;
+		box-sizing:border-box;/*怪异盒模型*/
+	}
+</style>
+<script>
+	window.onload = function(){
+		var box = document.querySelector("#box");
+		var uls = document.querySelectorAll("ul");
+		var num = 30;
+		
+		begin();
+		createLi();
+		function begin(){
+			for(var i = 0; i < uls.length; i++){
+				var ul = uls[i];
+				//自定义属性
+				ul.currentHeight = 0;
+			}
+		}
+		//创建一个得到随机数的函数
+		function randoms(max1,min1){
+			return parseInt(Math.random()*(max1 - min1) + min1);
+		}
+		//创建一个得到最小高度的函数
+		function minHeight(){
+			//var minHeight = uls[0].currentHeight;
+			var minUl = uls[0];
+			for(var i = 1; i < uls.length; i++){
+				//if(minHeight > uls[i].currentHeight){
+				//	minHeight = uls[i].currentHeight;
+				//}
+				if(minUl.currentHeight > uls[i].currentHeight){
+					minUl = uls[i];
+				}
+			}
+			return minUl;
+		}
+		function createLi(){
+			for(var i = 0; i < num; i++){
+				var li = document.createElement("li");
+				li.style.height = randoms(300,100) + "px";
+				li.innerHTML = i;
+				var ul1 = minHeight();//得到最小的ul
+				ul1.appendChild(li);
+				ul1.currentHeight += li.offsetHeight;
+			}
+		}
+	}
+</script>
+</head>
+<body>
+	<div id="box">
+    	<ul></ul>
+        <ul></ul>
+        <ul></ul>
+        <ul></ul>       
+    </div>
+</body>
+</html>

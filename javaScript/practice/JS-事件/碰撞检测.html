@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>碰撞检测</title>
+<style>
+	#first{
+		width:100px;
+		height:100px;
+		background:red;
+		position:absolute;
+		border-radius:50%;
+	}
+	#second {
+		width:100px;
+		height:100px;
+		background:green;
+		border-radius:50%;
+		position:absolute;
+		left:300px;
+		top:300px;
+	}
+</style>
+<script type="text/javascript" src="base.js"></script>
+<script>
+	window.onload = function(){
+		var first = document.querySelector("#first");
+		var second = document.querySelector("#second");
+		collision(first,second,function(){
+			second.style.background = "red";
+			first.style.background = "green";
+		},function(){
+			first.style.background = "red";
+			second.style.background = "green";
+		});
+		/*
+		//封装起来
+		//碰撞检测函数
+		function move(obj1,obj2){
+			//左右碰撞
+			var minX = obj2.offsetLeft - obj1.offsetWidth;
+			var maxX = obj2.offsetLeft + obj2.offsetWidth;
+			var minY = obj2.offsetTop - obj1.offsetHeight;
+			var maxY = obj2.offsetTop + obj2.offsetHeight;
+			
+			if(obj1.offsetLeft >= minX && obj1.offsetLeft <= maxX && 
+			obj1.offsetTop >= minY && obj1.offsetTop <= maxY){
+				obj2.style.background = "red";
+				obj1.style.background = "green";				
+			}else{
+				obj1.style.background = "red";
+				obj2.style.background = "green";
+			}
+		}
+		function collision(moveObj,endObj){
+			moveObj.onmousedown = function(e){
+				var ev = e || window.event;
+				var offX = ev.offsetX;
+				var offY = ev.offsetY;
+				document.onmousemove = function(e){
+					var ev = e || window.event;
+					var cliX = ev.clientX;
+					var cliY = ev.clientY;
+					moveObj.style.left = cliX - offX + "px";
+					moveObj.style.top = cliY - offY + "px";
+					move(moveObj,endObj);
+				}
+			}
+			moveObj.onmouseup = function(){
+				document.onmousemove = null;
+			}
+		}
+		*/
+		
+	}
+</script>
+</head>
+<body>
+	<div id="first"></div>
+    <div id="second"></div>
+</body>
+</html>

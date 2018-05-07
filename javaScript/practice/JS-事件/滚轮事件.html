@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	#box {
+		width:300px;
+		height:300px;
+		background:url("img/p5.jpg") no-repeat;
+		background-size:100%,100%;
+	
+	}
+</style>
+<script type="text/javascript" src="base.js"></script>
+<script>
+	window.onload = function(){
+		var box = document.querySelector("#box");
+		var width = box.offsetWidth;
+		var height = box.offsetHeight;
+		wheel(function(value){
+			if(value){				
+				box.style.width = (width -= 10) + "px";
+				box.style.height = (height -= 10) + "px";
+			}else{
+				box.style.width = (width += 10) + "px";
+				box.style.height = (height += 10) + "px";
+			}
+		});
+		
+		/*
+			onmousewheel:针对非火狐浏览器的使用
+		window.onmousewheel = function(e){
+			var ev = e || window.event;
+			//滚轮向下ev.wheelDelta：-120
+			//滚轮向上ev.wheelDelta:120
+			console.log(ev.wheelDelta);
+		}
+		
+		//火狐浏览器滚轮事件
+		window.addEventListener("DOMMouseScroll",function(e){
+			var ev = e || window.event;
+			//滚轮向下ev.detail：3
+			//滚轮向上ev.detail:-3
+			console.log(ev);	
+		},false);
+		
+		//判断浏览器是不是火狐
+		var str = window.navigator.userAgent;	//得到浏览器信息
+		var down = false;                       //判断滚轮向上还是向下滚动 false向上，true向下
+		if(str.indexOf("Firefox") != -1) {		//判断str里面的值不等于-1时，就是火狐浏览器
+			window.addEventListener("DOMMouseScroll",function(e){
+				var ev = e || window.event;
+				if(ev.detail < 0){
+					down = true;
+				}else{
+					down = false;
+				}
+			},false);
+		}else{
+			window.onmousewheel = function(e){
+				var ev = e || window.event;
+				if(ev.wheelDelta < 0){
+					down = true
+				}else{
+					down = flase;
+				}
+			}
+		}
+		
+		
+		var value = wheel();
+		if(value){
+			console.log("xiangxia");
+		}else{
+			console.log("xiangshang");
+		}
+		*/
+		
+		
+	}
+</script>
+</head>
+
+<body>
+	<div id="box"></div>
+</body>
+</html>

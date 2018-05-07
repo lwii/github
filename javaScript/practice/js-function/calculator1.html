@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>计算器</title>
+	<style>
+		ul,li{
+			list-style:none;
+			margin:0;
+			padding:0;
+		}
+    	#calculator {
+			width:468px;
+			height:640px;
+			border:1px solid #000;
+			border-radius:5px;
+			margin:0 auto;
+		}
+		#calculator .head {
+			width:468px;
+			height:160px;
+			background:#000;
+		}
+		#calculator ul {
+			width:100%;
+			height:30px;
+			overflow:hidden;
+		} 
+		#calculator li {
+			width:10px;
+			height:10px;
+			border:1px solid #eee;
+			border-radius:20px;
+			background:yellow;
+			float:left;
+			margin:5px 0 0 10px;
+		}
+		#calculator .content {
+			width:100%;
+			height:150px;
+			color:#fff;
+			text-align:right;
+			font:65px/50px blod serif;
+			
+		}
+		#body div {
+			width:115px;
+			height:94px;
+			border:1px solid #666;
+			float:left;
+			font-size:50px;
+			color:#666;			
+			text-align:center;
+			line-height:94px;
+			background:#c8c9cb;
+		}
+		#body div:nth-of-type(4),#body div:nth-of-type(8),
+		#body div:nth-of-type(12),#body div:nth-of-type(16),
+		#body div:nth-of-type(19){
+			background:#f98b10;
+		}
+		#body div:nth-of-type(17){
+			width:232px;
+		}
+		#body div:hover{
+			background:#eee;
+		}
+    </style>
+    <script>
+    	window.onload = function(){
+			var oCalcu = document.getElementById("calculator"); 
+			var ap = oCalcu.getElementsByTagName("p")[0];
+			var aBody = document.getElementById("body");
+			var aDiv = aBody.getElementsByTagName("div");
+			
+			
+			var str1 = "";					
+			for(var i=0; i<aDiv.length; i++){
+				aDiv[i].index = i;
+				aDiv[i].onclick = function(){
+					var num = 0;					
+					str1 = str1 + this.innerHTML;
+					ap.innerHTML = str1;
+					switch(this.index){
+						case 0:
+							clear();
+							break;
+						case 18: 
+							calculator(); 
+							break;
+						case 3:
+							//var num = 0;
+							var str = str1.substr(0,str1.length - 1);  //去除字符串最后一个字符
+							if(str.indexOf("÷") != -1){
+								var arr = str.split("÷");
+								num = parseFloat(arr[0]) / parseFloat(arr[1]);
+								//ap.innerHTML = "";
+								str1 = String(num) + "÷";								
+							}else {
+								num = parseFloat(str);
+							}
+							ap.innerHTML = num;		
+							break;
+						case 7:
+							//var num = 0;
+							var str = str1.substr(0,str1.length - 1);  //去除字符串最后一个字符
+							if(str.indexOf("x") != -1){
+								var arr = str.split("x");
+								num = parseFloat(arr[0]) * parseFloat(arr[1]);
+								//ap.innerHTML = "";
+								str1 = String(num) + "x";								
+							}else {
+								num = parseFloat(str);
+							}
+							ap.innerHTML = num;		
+							break;
+						case 11:
+							//var num = 0;
+							var str = str1.substr(0,str1.length - 1);  //去除字符串最后一个字符
+							if(str.indexOf("-") != -1){
+								var arr = str.split("-");
+								num = parseFloat(arr[0]) - parseFloat(arr[1]);
+								//ap.innerHTML = "";
+								str1 = String(num) + "-";								
+							}else {
+								num = parseFloat(str);
+							}
+							ap.innerHTML = num;		
+							break;
+						case 15:
+							//var num = 0;
+							var str = str1.substr(0,str1.length - 1);  //去除字符串最后一个字符
+							if(str.indexOf("+") != -1){
+								var arr = str.split("+");
+								num = parseFloat(arr[0]) + parseFloat(arr[1]);
+								//ap.innerHTML = "";
+								str1 = String(num) + "+";								
+							}else {
+								num = parseFloat(str);
+							}
+							ap.innerHTML = num;			
+							break;
+					}
+					
+				}
+			}
+			function fn(){
+				
+			}
+			//清除
+			function clear(){
+				ap.innerHTML = "";
+				str1 = "";
+			}
+			//计算
+			function calculator(){
+				var num = 0;
+				var str = str1.substr(0,str1.length - 1);  //去除字符串最后一个字符 
+				
+				
+				if(str.indexOf("+") != -1){
+					var arr = str.split("+");
+					
+						num = parseFloat(arr[0]) + parseFloat(arr[1]);
+						ap.innerHTML = "";
+						ap.innerHTML = num;
+						str1 = String(num);
+								
+				}else if(str.indexOf("-") != -1){
+					var arr = str.split("-");
+					for(var i = 0; i < arr.length; i++){
+						num = parseFloat(arr[0]) - parseFloat(arr[1]);
+						ap.innerHTML = "";
+						ap.innerHTML = num;
+						str1 = String(num);
+						
+					}
+				}else if(str.indexOf("x") != -1){
+					var arr = str.split("x");
+					for(var i = 0; i < arr.length; i++){
+						num = parseFloat(arr[0]) * parseFloat(arr[1]);
+						ap.innerHTML = "";
+						ap.innerHTML = num;
+						str1 = String(num);
+					}
+				}else if(str.indexOf("÷") != -1){
+					var arr = str.split("÷");
+					for(var i = 0; i < arr.length; i++){
+						num = parseFloat(arr[0]) / parseFloat(arr[1]);
+						ap.innerHTML = "";
+						ap.innerHTML = num;
+						str1 = String(num);
+					}
+				}else if(str.indexOf("%") != -1){
+					var arr = str.split("%");
+					for(var i = 0; i < arr.length; i++){
+						num = parseFloat(arr[0]) % parseFloat(arr[1]);
+						ap.innerHTML = "";
+						ap.innerHTML = num;
+						str1 = String(num);
+					}
+				}
+			}
+				
+			
+			
+		}
+    </script>
+</head>
+<body>
+	<div id="calculator">
+    	<div class="head">
+        	<ul class="close">
+            	<li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <p class="content"></p>
+        </div>
+        <div id="body">
+        	<div>c</div>
+            <div>+/-</div>
+            <div>%</div>
+            <div>÷</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>x</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>-</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>+</div>
+            <div>0</div>
+            <div>.</div>
+            <div>=</div>            
+        </div>
+        
+    </div>
+</body>
+</html>

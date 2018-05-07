@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        body {
+            background: #e8e8e8;
+        }
+        * {
+            list-style: none;
+        }
+        #box {
+            width:1200px;
+            height:1500px;
+            border: 1px solid red;
+            margin:0 auto;
+        }
+        #box .row {
+            width:400px;
+            height:100%;
+            float: left;
+            border:1px solid blue;
+        }
+        #box .row li {
+            background: #fff;
+            margin:10px 0;
+        }
+        #box .right {
+            width: 700px;
+            height:900px;
+            float:right;
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+    <!--<div id="box">
+        <div>
+            <div class="row">
+                <ul class="left">
+                    &lt;!&ndash;使用router-link组件来导航&ndash;&gt;
+                    &lt;!&ndash;通过传入"to"属性制定连接&ndash;&gt;
+                    &lt;!&ndash;<router-link>默认会被渲染成一个<a>标签&ndash;&gt;
+                    <li><router-link to="h5">HTML5学院</router-link></li>
+                    <li><router-link to="/java">java学院</router-link></li>
+                    <li><router-link to="/c">c++学院</router-link></li>
+                </ul>
+            </div>
+            <div class="right">
+                <div>
+                    <div class="pan">
+                        &lt;!&ndash;路由出口&ndash;&gt;
+                        &lt;!&ndash; 路由匹配到的组件将渲染在这里&ndash;&gt;
+                        <router-view></router-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="h5">
+        <div>
+            <h2>这里是HTML5学院</h2>
+            <p>听说现在HTML5很火啊!</p>
+            <img src="img/h5.jpg" alt=""/>
+        </div>
+    </template>
+
+    <template id="java">
+        <div>
+            <h2>这里是java学院</h2>
+            <p>听说现在JAVA很强大哦!</p>
+            <img src="img/java.jpg" alt=""/>
+        </div>
+    </template>
+
+    <template id="c">
+        <div>
+            <h2>这里是C++学院</h2>
+            <p>c++总是前年老大位子!</p>
+            <img src="img/c++.jpg" alt=""/>
+        </div>
+    </template>
+
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+    const Html5 = Vue.extend({
+        template:"#h5"
+    });
+    const Java = Vue.extend({
+        template:"#java"
+    });
+    const C = Vue.extend({
+        template:"#c"
+    });
+    //定义路由
+    const routes = [
+        {path:'/h5',component:Html5},
+        {path:'/java',component:Java},
+        {path:'/c',component:C},
+            //根路由
+        {path: '/', redirect:'h5'}
+    ];
+    //创建路由实例
+    const router = new VueRouter({
+        routes:routes
+    });
+    //创建Vue实例并挂载
+    new Vue({
+        router:router
+    }).$mount("#box");
+</script>-->
+
+    <div id="box">
+        <div>
+            <div class="row">
+                <ul class="left">
+                    <!--使用router-link组件来导航-->
+                    <!--通过传入"to"属性制定连接-->
+                    <!--<router-link>默认会被渲染成一个<a>标签-->
+                    <li><router-link to="/h5">HTML5学院</router-link></li>
+                    <li><router-link to="/java">java学院</router-link></li>
+                    <li><router-link to="/c">c++学院</router-link></li>
+                </ul>
+            </div>
+            <div class="right">
+                <div>
+                    <div class="pan">
+                        <!--路由出口-->
+                        <!-- 路由匹配到的组件将渲染在这里-->
+                        <router-view></router-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="h5">
+        <div>
+            <h2>这里是HTML5学院</h2>
+            <p>听说现在HTML5很火啊!</p>
+            <img src="img/h5.jpg" alt="" width="300px"/>
+            <div>
+                <router-link to="/h5/basic">基础班</router-link>
+                <router-link to="/h5/big">大神班</router-link>
+            </div>
+            <div>
+                <router-view></router-view>
+            </div>
+        </div>
+    </template>
+
+    <template id="basic">
+        <div>
+            <h2>基础班</h2>
+            <p>这里是入门HTML5学院</p>
+            <img src="img/h5.jpg" alt="" width="200px"/>
+        </div>
+    </template>
+
+    <template id="big">
+        <div>
+            <h2>大神班</h2>
+            <p>这里是精通HTML5学院</p>
+            <img src="img/h5.jpg" alt="" width="200px"/>
+        </div>
+    </template>
+
+    <template id="java">
+        <div>
+            <h2>这里是java学院</h2>
+            <p>听说现在JAVA很强大哦!</p>
+            <img src="img/java.jpg" alt=""  width="300px"/>
+        </div>
+    </template>
+
+    <template id="c">
+        <div>
+            <h2>这里是C++学院</h2>
+            <p>c++总是前年老大位子!</p>
+            <img src="img/c++.jpg" alt="" width="300px"/>
+        </div>
+    </template>
+
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+    <script>
+        const Html5 = Vue.extend({
+            template:"#h5"
+        });
+        const Basic = Vue.extend({
+            template:"#basic"
+        });
+        const Big = Vue.extend({
+            template:"#big"
+        });
+        const Java = Vue.extend({
+            template:"#java"
+        });
+        const C = Vue.extend({
+            template:"#c"
+        });
+        //定义路由
+        const routes = [
+            {
+                path:'/h5',
+                component:Html5,
+                children:[
+                    {path:'basic',component:Basic},
+                    {path:'big',component:Big},
+                    //根路由
+                    {path: '/', redirect:'big'}
+                ]
+            },
+            {path:'/java',component:Java},
+            {path:'/c',component:C},
+            //根路由
+            {path: '/', redirect:'h5'}
+        ];
+        //创建路由实例
+        const router = new VueRouter({
+            routes:routes
+        });
+        //创建Vue实例并挂载
+        new Vue({
+            router:router
+        }).$mount("#box");
+    </script>
+</body>
+</html>

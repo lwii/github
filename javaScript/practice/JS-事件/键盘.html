@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	#box {
+		width:500px;
+		height:900px;
+		border:1px solid red;
+		position:relative;
+		margin:0 auto;
+	}
+	#box1 {
+		width:100px;
+		height:100px;
+		background:pink;
+		position:absolute;
+		top:400px;
+		left:200px;
+	}
+</style>
+<script>
+	window.onload =function(){
+		var box1 = document.querySelector("#box1");
+		window.onkeydown = function(e){
+			var ev = e || window.event;
+			var boxleft = box1.offsetLeft;
+			var boxtop = box1.offsetTop;
+			switch(ev.keyCode){
+				case 37:
+					boxleft -= 50;
+					box1.style.left = boxleft + "px";
+					break;
+				case 38:
+					boxtop -= 50;
+					box1.style.top = boxtop + "px";
+					break;
+				case 39:
+					boxleft += 50;
+					box1.style.left = boxleft + "px";
+					break;
+				case 40:
+					boxtop += 50;
+					box1.style.top = boxtop + "px";
+					break;
+					
+				default:
+					break;
+			}
+		}
+	}
+</script>
+</head>
+<body>
+	<div id="box">
+    	<div id="box1"></div>
+    </div>
+</body>
+</html>

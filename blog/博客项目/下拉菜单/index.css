@@ -1,0 +1,753 @@
+
+body{
+	margin:0;
+	padding:0;
+	background:url(images/header_bg.png) repeat-x;
+	font-size:12px;
+	color:#333;
+}
+ul,dl,dd,h2 ,p,form{
+	margin:0;
+	padding:0;
+}
+ul li {
+	list-style-type:none;				
+}
+#header{
+	width:900px;
+	height:30px;
+	margin:0 auto;
+}
+
+#header .header_logo{
+	width:100px;
+	height:30px;
+	float:left;
+}
+#header .header_logo img{
+	display:block;
+}
+#header .header_member {
+	font-size:14px;
+	width:80px;
+	height:30px;
+	line-height:30px;
+	float:right;
+	background: url(images/arrow.png) no-repeat 60px center;
+	position:relative;
+}
+#header ul {
+	position:absolute;
+	top:30px;
+	left:0px;
+	background:#FBF7E1;
+	width:100px;
+	height:0;
+	border:1px solid #999;
+	border-top:none;
+	padding:10px 0 0 0;
+	display:none;
+	overflow:hidden;
+}
+#header ul li {
+	height:25px;
+	line-height:25px;
+	text-indent:20px;
+	letter-spacing:1px;
+}
+#header ul li a {
+	display:block;
+	text-decoration:none;
+	color:#333;
+	background:url(images/arrow3.gif) no-repeat 5px center;
+}
+#header ul li a:hover {
+	background:#fc0 url(images/arrow4.gif) no-repeat 5px center;
+}
+/*-----登录，注册样式设置------*/
+#header .header_login , #header .header_register {
+	font-size:14px;
+	float:right;
+	width:45px;
+	height:30px;
+	cursor:pointer;
+	line-height:30px;	
+}
+/*-----------遮罩锁屏------------*/
+#screen {
+	position:absolute;
+	top:0;
+	left:0;
+	background:#000;
+	z-index:9998;
+	/*filter:alpha(opacity=30); */
+	opacity:0;
+	display:none;
+}
+/*#test {
+	width:100px;
+	height:100px;
+	position:absolute;
+	top:100px;
+	left:100px;
+	background:red;
+	opacity:0.7;
+}*/
+/*-----------登录框 -----------*/
+#login  {
+	width:350px;
+	height:250px;
+	border:1px solid #ccc;
+	position:absolute;
+	display:none;
+	z-index:9999;
+	background:#fff;
+}
+#login h2 {
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	font-size:14px;
+	letter-spacing:2px;
+	color:#666;
+	background:url(images/login_header.png) repeat-x;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #ccc;
+	margin:0 0 20px 0;
+	cursor:move;
+}
+#login h2 img {
+	float:right;
+	position:relative;
+	top:14px;
+	right:8px;
+	cursor:pointer;
+}
+#login div.user,#login div.pass {
+	font-size:14px;
+	color:#666;
+	padding:5px 0;
+	text-align:center;
+}
+#login input.text {
+	width:200px;
+	height:25px;
+	border:1px solid #ccc;
+	background:#fff;
+	font-size:14px;
+}
+#login .button {
+	text-align:center;
+	padding:20px 0;
+}
+#login input.submit {
+	width:107px;
+	height:30px;
+	background:url(images/login_button.png) no-repeat;
+	border:none;
+	cursor:pointer;
+}
+#login .other {
+	text-align:right;
+	padding:15px 5px;
+	color:#666;
+}
+/*-----------注册框 -----------*/
+#register  {
+	width:600px;
+	height:550px;
+	border:1px solid #ccc;
+	position:absolute;
+	display:none;
+	z-index:9999;
+	background:#fff;
+}
+#register h2 {
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	font-size:14px;
+	letter-spacing:2px;
+	color:#666;
+	background:url(images/login_header.png) repeat-x;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #ccc;
+	margin:0 0 20px 0;
+	cursor:move;
+}
+#register h2 img {
+	float:right;
+	position:relative;
+	top:14px;
+	right:8px;
+	cursor:pointer;
+}
+#register dl {
+	font-size:14px;
+	color:#333;
+	margin:20px;
+	padding:0 0 0 10px;
+	position:relative;
+}
+#register dl dd{
+	height:30px;
+	padding: 5px 0;
+}
+#register dl dd input.text , #register dl dd select  {
+	width:200px;
+	height:25px;
+	border:1px solid #ccc;
+	background:#fff;
+	font-size:14px;
+	color:#666;
+}
+#register dl dd select  {
+	width:203px;
+}
+#register dl dd.birthday select {
+	width:70px;
+}
+/*-----------备注-------------*/
+#register dl dd textarea {
+	width:360px;
+	height:100px;
+	background:#fff;
+	border:1px solid #ccc;
+}
+#register dl dd.pss,#register dl dd.psss {
+	padding: 0 0 0 300px;
+}
+#register dl dd.pss strong.num ,#register dl dd.psss strong.num {
+	padding:0 5px;
+}
+#register dl dd.psss strong.clear {
+	color:#06f;
+	cursor:pointer;
+}
+#register dl dd input.submit {
+	width:143px;
+	height:33px;
+	background:url(images/reg.png) no-repeat;
+	border:none;
+	cursor:pointer;
+}
+#register dl dd span.info , #register dl dd span.error , #register dl dd span.succ {
+	display:block;
+	font-size:12px;
+	color:#333;
+	width:165px;	
+	height:35px;
+	line-height:35px;
+	padding:0 0 0 35px;
+	position:absolute;
+	letter-spacing:1px;
+	display:none;
+}
+#register dl dd span.info {
+	background:url(images/reg_info.png) no-repeat;
+}
+#register dl dd span.error {
+	background:url(images/reg_error.png) no-repeat;
+}
+#register dl dd span.succ {
+	height:14px;
+	line-height:14px;
+	background:url(images/reg_succ.png) no-repeat;
+	padding:0 0 0 20px;
+	color:green;
+}
+/*-----------用户名-------------*/
+#register dl dd span.info_user {
+	height:43px;
+	line-height:18px;
+	padding-top:7px;
+	top:3px;
+	left:295px;
+	background:url(images/reg_info2.png) no-repeat;
+}
+#register dl dd span.error_user {
+	top:3px;
+	left:295px;
+}
+#register dl dd span.succ_user {
+	top:12px;
+	left:295px;
+}
+/* -----------密码框------------*/
+#register dl dd span.info_pass {
+	width:260px;
+	height:106px;
+	padding:4px 0 0 16px;
+	background:url(images/reg_info3.png) no-repeat;
+	top:5px;
+	left:295px;
+	letter-spacing:0;
+}
+#register dl dd span.info_pass p{	
+	height:25px;
+	line-height:25px;
+	color:#666;
+}
+#register dl dd span.info_pass p strong.s{	
+	color:#ccc;
+}
+#register dl dd span.error_pass {
+	top:43px;
+	left:295px;
+}
+#register dl dd span.succ_pass {
+	top:52px;
+	left:295px;
+}
+/*--------------密码确认---------------*/
+#register dl dd span.info_notpass{	
+	top:83px;
+	left:295px;
+}
+#register dl dd span.error_notpass {
+	top:83px;
+	left:295px;
+}
+#register dl dd span.succ_notpass {
+	top:93px;
+	left:295px;
+}
+/*--------------提问---------------*/
+#register dl dd span.error_ques {
+	top:123px;
+	left:295px;
+}
+/*--------------回答---------------*/
+#register dl dd span.info_ans{	
+	top:163px;
+	left:295px;
+}
+#register dl dd span.error_ans {
+	top:163px;
+	left:295px;
+}
+#register dl dd span.succ_ans {
+	top:173px;
+	left:295px;
+}
+/*--------------电子邮件---------------*/
+#register dl dd span.info_email{	
+	top:203px;
+	left:295px;
+}
+#register dl dd span.error_email {
+	top:203px;
+	left:295px;
+}
+#register dl dd span.succ_email {
+	top:213px;
+	left:295px;
+}
+#register dl dd ul.all_email {
+	width:180px;
+	height:130px;
+	background:#fff;
+	position:absolute;
+	top:233px;
+	left:80px;
+	border:1px solid #ccc;
+	padding:5px 10px;
+	display:none;
+}
+#register dl dd ul.all_email li {
+	height:25px;
+	line-height:25px;
+	border:1px solid #e5edf2;
+	padding:0 5px;
+	cursor:pointer;
+}
+/*--------------生日---------------*/
+#register dl dd span.error_birthday {
+	top:241px;
+	left:320px;
+}
+/*-------------滑动导航---------------*/
+#nav {
+	width:465px;
+	height:52px;
+	background:url(images/nav_bg.png);
+	margin: 50px auto 0 auto;
+	position:relative;
+}
+#nav ul {
+	position:absolute;
+}
+#nav ul.about{
+	z-index:4;
+	left:20px;
+	cursor:pointer;
+}
+#nav ul li {
+	width:85px;
+	height:52px;		
+	float:left;
+	text-align:center;
+	line-height:52px;
+}
+#nav .black {
+	left:20px;
+	color:#999;
+	z-index:1;
+}
+#nav div.nav_bg {
+	display:block;
+	width:85px;
+	height:52px;
+	background:url(images/nav_over.png) no-repeat 0 11px;
+	position:absolute;
+	top:0px;
+	left:20px;
+	z-index:2;
+	overflow:hidden;
+}
+#nav ul.white {
+	z-index:3;
+	color:#fff;	
+	width:425px;
+	left:0px;
+}
+
+#main {
+	width:900px;
+	
+	margin:50px auto;
+}
+#sidebar {
+	width:250px;
+	height:500px;
+
+	float:left;
+}
+#sidebar h2 {
+	width:248px;
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	background:url(images/side_h.png);
+	border:1px solid #ccc;
+	border-bottom:none;
+	margin:0;
+}
+#sidebar ul {
+	height:150px;
+	border:1px solid #ccc;
+	margin:0 0 10px 0;
+	overflow:hidden;
+	opacity:1;
+	
+}
+#sidebar ul li {
+	height:30px;
+	line-height:30px;
+	background:url(images/arrow4.gif) no-repeat 12px center;
+	text-indent:30px;
+}
+#sidebar ul li a {
+	text-decoration:none;
+	color:#333;
+}
+#index {
+	width:630px;
+	height:570px;
+	background:#eee;
+	float:right;
+}
+/*-------------轮播器---------------*/
+#banner {
+	width:900px;
+	height:150px;
+	float:left;
+	margin:10px 0;
+	position:relative;
+	overflow:hidden;
+}
+
+#banner img {
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:1;
+}
+#banner span {
+	width:900px;
+	height:25px;
+	position:absolute;
+	top:125px;
+	left:0;
+	background:#333;
+	opacity:0.3;
+	z-index:3;
+}
+#banner strong {
+	position:absolute;
+	top:130px;
+	left:10px;
+	color:#fff;
+	z-index:4;
+}
+#banner ul {
+	position:absolute;
+	top:128px;
+	left:420px;
+	z-index:4;
+}
+#banner ul  li {
+	float:left;
+	padding:0 5px;
+	font-size:16px;
+	color:#999;
+	cursor:pointer;
+}
+/*-------------延迟加载--------------*/
+#photo {
+	width:900px;
+	float:left;
+}
+#photo dl {
+	width:225px;
+	height:270px;
+	float:left;
+	margin:5px 0 15px 0;
+}
+#photo dl dt {
+	width:200px;
+	height:250px;
+	background:#eee;	
+	margin: 0 auto;
+}
+#photo dl dt img {
+	cursor:pointer;
+	display:block;
+}
+#photo dl dd {
+	height:25px;
+	line-height:25px;
+	text-align:center;
+}
+/*-------------预加载--------------*/
+#photo_big  {
+	width:620px;
+	height:511px;
+	border:1px solid #ccc;
+	position:absolute;
+	top:100px;
+	left:200px;
+	z-index:9999;
+	background:#fff;
+	display:none;
+}
+#photo_big .big {
+	width:620px;
+	height:460px;
+	padding:10px 0 0 0;
+}
+#photo_big .big img {
+	display:block;
+	margin:0 auto;
+	position:relative;
+	top:190px;
+}
+#photo_big h2 {
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	font-size:14px;
+	letter-spacing:2px;
+	color:#666;
+	background:url(images/login_header.png) repeat-x;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #ccc;
+	cursor:move;
+}
+#photo_big h2 img {
+	float:right;
+	position:relative;
+	top:14px;
+	right:8px;
+	cursor:pointer;
+}
+#photo_big .big strong {
+	display:block;
+	width:100px;
+	height:100px;
+	line-height:100px;
+	text-align:center;
+	background:#000;
+	opacity:0;
+	font-size:60px;
+	color:#fff;
+	cursor:pointer;
+	position:absolute;
+}
+#photo_big .big strong.sl {
+	top:210px;
+	left:20px;
+}
+#photo_big .big strong.sr {
+	top:210px;
+	right:20px;
+}
+#photo_big .big span {
+	display:block;
+	width:300px;
+	height:450px;
+	background:#000;
+	opacity:0;
+	position:absolute;
+	cursor:pointer;
+}
+#photo_big .big span.left {
+	top:50px;
+	left:10px;
+}
+#photo_big .big span.right {
+	top:50px;
+	right:10px;
+}
+#photo_big .big em{
+	position:absolute;
+	top:480px;
+	right:20px;
+	color:#fff;
+	font-size:14px;
+	font-style:normal;
+}
+/*-------------百度分享侧栏---------------*/
+#share{
+	width:210px;
+	height:315px;
+	border:1px solid #ccc;
+	position:absolute;
+	top:0px;
+	left:-211px;
+}
+#share h2 {
+	height:30px;
+	line-height:30px;
+	background:#eee;
+	margin:0;
+	padding:0;
+	font-size:14px;
+	text-indent:10px;
+	color:#666;
+}
+#share ul {
+	padding:3px 0 2px 5px;
+	height:254px;
+}
+#share ul li {
+	width:96px;
+	height:28px;
+	float:left;
+	padding:2px;
+	font-size:14px;
+}
+#share ul li a {
+	display:block;
+	width:95px;
+	height:26px;
+	line-height:26px;
+	text-decoration:none;
+	color:#666;
+	text-indent:25px;
+	background-image:url(images/share_bg.png);
+	background-repeat:no-repeat;
+}
+#share ul li a.a {
+	background-position:5px 4px;
+}
+#share ul li a.b {
+	background-position:5px -26px;
+}
+#share ul li a.c {
+	background-position:5px -56px;
+}
+#share ul li a.d {
+	background-position:5px -86px;
+}
+#share ul li a.e {
+	background-position:5px -116px;
+}
+#share ul li a.f {
+	background-position:5px -146px;
+}
+#share ul li a.g {
+	background-position:5px -176px;
+}
+#share ul li a.h {
+	background-position:5px -206px;
+}
+#share ul li a.i {
+	background-position:5px -236px;
+}
+#share ul li a.j {
+	background-position:5px -266px;
+}
+#share ul li a.k {
+	background-position:5px -296px;
+}
+#share ul li a.l {
+	background-position:5px -326px;
+}
+#share ul li a.m {
+	background-position:5px -356px;
+}
+#share ul li a.n{
+	background-position:5px -386px;
+}
+#share ul li a.o {
+	background-position:5px -416px;
+}
+#share ul li a.p {
+	background-position:5px -446px;
+}
+#share ul li a:hover {
+	color:#06f;
+	opacity:0.7;
+	background-color:#fafafa;
+}	
+
+#share .share_footer {
+	height:26px;
+	line-height:26px;
+	background:#eee;
+	text-align:right;
+}
+#share .share_footer a {
+	padding:0 13px;
+	background:url(images/share_bg.png) no-repeat 0 -475px;
+	text-decoration:none;
+	color:#666;
+	font-size:14px;
+}
+#share .share_footer a:hover {
+	color:#06f;
+	opacity:0.7;
+	background-color:#fafafa;
+}
+#share .share_footer span {
+	display:block;
+	width:24px;
+	height:88px;
+	position:absolute;
+	top:90px;
+	left:210px;
+	background:url(images/share.png) no-repeat;
+	cursor:pointer;
+}
+
+
+
+
+
+
+

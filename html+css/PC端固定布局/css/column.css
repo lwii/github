@@ -1,0 +1,112 @@
+﻿@charset "utf-8";
+/*-------------头部-----------*/
+#headline {
+	width:100%;
+	min-width:1263px;
+	height:300px;
+	background:linear-gradient(to right bottom,rgba(0,0,0,0.7),rgba(255,255,255,0)) , url(../img/headline.jpg) no-repeat center;
+}
+#headline .center {
+	width:1263px;
+	margin:0 auto;	
+	height:300px;
+}
+#headline hgroup {
+	padding:100px 0 0 50px;
+}
+#headline h2 {
+	font-size:36px;
+	color:#eee;
+	letter-spacing:1px;
+}
+#headline h3 {
+	font-size:20px;
+	color:#eee;
+	letter-spacing:1px;
+}
+/*-------------侧栏-----------*/
+#container {
+	width:1263px;
+	height:1200px;
+	margin:30px auto;
+}
+#container .sidebar {
+	width:340px;
+	height:1200px;
+	float: right;
+}
+#container .sidebox {
+	border: 1px solid #999;
+	margin: 0 0 10px 0; 
+	text-align: center;
+}
+#container .sidebar h2 {
+	height: 40px;
+	line-height: 40px;
+	background-color: #fafafa;
+	font-weight: normal;
+	font-size: 20px;
+	color:#666;
+	text-align: left;
+}
+#container .sidebar .rmd ul {
+	margin: 10px 5px;
+}
+#container .sidebar .rmd ul li {
+	display: inline-block;
+	width:100px;
+	height: 30px;
+	line-height: 30px;
+	background: #eee;
+	margin: 2px 0;
+	text-indent: 8px;
+	text-align: left;
+}
+#container .sidebar .rmd a {
+	color:#999;	
+}
+#container .sidebar .rmd a:hover {
+	background-color:#458b00;
+	color:#fff; 
+}
+#container  .figure {
+	padding: 10px 0;
+}
+#container figure {
+	display: inline-block;
+	padding: 10px 2px;
+	color:#666;
+}
+#container .sidebar .box ul {
+	padding: 10px 0;
+}
+#container .sidebar .box ul li {
+	display: inline-block;
+	width:150px;
+	height: 40px;
+	line-height: 40px;
+	background: #eee;
+	margin: 2px 0;
+}
+#container .sidebar .box .trea1 {	
+	background:#eee url(../img/trea1.png) no-repeat 15px ;
+}
+#container .sidebar .box .trea2 {	
+	background:#eee url(../img/trea2.png) no-repeat 15px ;
+}
+#container .sidebar .box .trea3 {	
+	background:#eee url(../img/trea3.png) no-repeat 15px ;
+}
+#container .sidebar .box .trea4 {	
+	background:#eee url(../img/trea4.png) no-repeat 10px ;
+}
+#container .sidebar .box a img {
+	height: 40px;
+	line-height: 40px;
+}
+#container .list {
+	width:900px;
+	height:1200px;
+	background:red;
+	float:left;
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	a {
+		display:block;
+	}
+	* {
+		margin:0;
+		padding:0;
+	}
+	#box {
+		width:1240px;
+		height:800px;
+		margin:0 auto;
+		border:1px solid red;
+		padding:5px;
+	}
+	#box .divImg {
+		width:220px;
+		height:375px;
+		border:1px solid #eee;
+		border-radius:5px;
+		padding:5px;
+		float:left;
+		margin:8px;
+	}
+	#box .divImg img {
+		width:220px;
+		height:220px%;
+	}
+	#box .content {
+		width:220px;
+		height:40px;
+		border:1px solid red;
+	}
+	#box p {
+		color:red;
+		width:220px;
+		height:30px;
+		font-size:20px;
+		line-height:30px;
+		margin: 5px 0;
+	}
+	#box a:nth-of-type(1){
+		font-size:13px;
+		color:#333;
+		text-decoration:none;
+	}
+	#box a:nth-of-type(2){
+		font-size:12px;
+		margin:5px 0;
+		color:#999;
+		text-decoration:underline;
+	}
+	#box a:hover {
+		color:red;
+		text-decoration:underline;
+	}
+	#box span {
+		display:inline-block;
+		margin:5px 0;
+		padding:5px 0;
+		font-size:12px;
+		color:#666;
+	}
+	#box span:nth-of-type(1){
+		width:85px;
+		border-right:1px solid #eee;
+		border-top:1px solid #eee;
+		
+	}
+	#box span:nth-of-type(2){
+		width:80px;
+		border-right:1px solid #eee;
+		border-top:1px solid #eee;
+		
+	}
+	#box span:nth-of-type(3){
+		width:50px;
+		border-top:1px solid #eee;
+		border-right:1px solid #eee;	
+	}
+</style>
+<script>
+	window.onload = function(){
+		var box = document.getElementById("box");
+		createDiv(10);
+		function createDiv(num){
+			for(var i = 0; i < num ; i++){
+				var div = document.createElement("div");
+				div.className = "divImg";
+				box.appendChild(div);
+				
+				//photo
+				var img = document.createElement("img");
+				img.src = "img/" + (i+1) + ".jpg";
+				div.appendChild(img);
+				
+				//div
+				var div1 = document.createElement("div");
+				div1.className = "content";
+				div.appendChild(div1);
+				
+				//p 价格
+				var ap = document.createElement("p");
+				ap.innerHTML = "￥ 200.00";
+				div.appendChild(ap);
+				
+				//a 
+				var a1 = document.createElement("a");
+				a1.innerHTML = "花花公子秋季男士休闲薄款毛衣";
+				div.appendChild(a1);
+				
+				var a2 = document.createElement("a");
+				a2.innerHTML = "秋朵姿旗舰店";
+				div.appendChild(a2);
+				
+				//span
+				var aSpan1 = document.createElement("span");
+				aSpan1.innerHTML = "月成交 7854笔";
+				div.appendChild(aSpan1);
+				var aSpan2 = document.createElement("span");
+				aSpan2.innerHTML = "评价 3771";
+				div.appendChild(aSpan2);
+				var aSpan3 = document.createElement("span");
+				div.appendChild(aSpan3);
+			}			
+		}
+		
+	}
+</script>
+</head>
+<body>
+	<div id="box">
+    
+    </div>
+</body>
+</html>

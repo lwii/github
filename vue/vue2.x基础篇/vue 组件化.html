@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--全局组件-->
+<!--<div id="box">
+    <my-date></my-date>
+    <my-date></my-date>
+    <my-color></my-color>
+</div>
+<div id="box1">
+    <my-color></my-color>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    //1:创建组件构造器
+    let Profile = Vue.extend({
+        //1.1:模版选项
+        template:`
+                 <div>
+                    <input type="date"/>
+                    <p>今天学习全局组件的创建</p>
+                 </div>
+                 `
+    });
+
+    let Profile2 = Vue.extend({
+        template:`
+                    <div>
+                        <input type="color"/>
+                        <p>这是局部组件的创建</p>
+                    </div>
+                 `,
+    });
+    //2:全局的组件
+    Vue.component('my-date',Profile);
+
+
+
+    new Vue({
+        el : "#box",
+        //创建局部组件
+        components:{
+            'my-date':Profile,
+            'my-color':Profile2,
+        },
+    });
+
+    new Vue({
+        el:"box1",
+        components:{
+            'my-color':Profile2,
+        },
+    });
+</script>-->
+
+
+<!--父子组件-->
+<!--<div id="box">
+<perent></perent>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    //子组件构造器
+    let child1 = Vue.extend({
+        template:`<img src="img/1.jpg" width = "200" height="200" />`,
+    });
+    let child2 = Vue.extend({
+        template:`<p>冬天很美</p>`
+    });
+    //父组件构造器
+    Vue.component("perent",{
+        components:{
+                   "my-child1":child1,
+                   "my-child2":child2,
+                    },
+        template:`
+                 <div>
+                    <my-child1></my-child1>
+                    <my-child2></my-child2>
+                 </div>
+                 `,
+    });
+    new Vue({
+        el : "#box",
+
+    });
+</script>-->
+
+
+<!--template和script-->
+    <div id="box">
+        <my-data></my-data>
+        <my-img></my-img>
+    </div>
+    <script type="text/html" id="img">
+        <div>
+            <img src="img/1.jpg" alt=""/>
+            <p>冬天也很美!</p>
+        </div>
+    </script>
+    <template id="data">
+        <div>
+            <div>卧室lwii</div>
+            <p>nihao a  </p>
+        </div>
+    </template>
+<script src="js/vue.js"></script>
+<script>
+    Vue.component("my-data",{
+        template:"#data",
+    });
+    Vue.component("my-img",{
+        template:"#img",
+    });
+    new Vue({
+        el : "#box",
+
+    });
+</script>
+</body>
+</html>

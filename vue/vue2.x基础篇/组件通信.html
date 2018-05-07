@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--<div id="box">
+    <my-photo message="冬天走了!" imgsrc="img/1.jpg"></my-photo>
+    <my-photo message="春天来了!" imgsrc="img/2.jpg"></my-photo>
+</div>
+<template id="photo">
+    <div>
+        <img :src="imgsrc" alt=""/>
+        <p>{{message}}</p>
+    </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+    Vue.component("my-photo",{
+        template:"#photo",
+        props:["message","imgsrc"],
+    });
+    new Vue({
+        el : "#box",
+
+    });
+</script>-->
+<!--多层组件之间的通信-->
+<div id="box">
+<my-perent :imgsrc="img" :imgtitle="title"></my-perent>
+</div>
+
+<template id="img">
+    <img :src="imgsrc" alt=""/>
+</template>
+
+<template id="title">
+    <h2>{{title}}</h2>
+</template>
+
+<template id="perent">
+    <div>
+        <child1 :imgsrc="imgsrc"></child1>
+        <child2 :title="imgtitle"></child2>
+    </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+    let Child1 = Vue.extend({
+        template:"#img",
+        props:["imgsrc"],
+    });
+    let Child2 = Vue.extend({
+        template:"#title",
+        props:["title"],
+    });
+    Vue.component("my-perent",{
+        template:"#perent",
+        props:["imgsrc","imgtitle"],
+        components:{
+            'child1': Child1,
+            'child2': Child2,
+        },
+    });
+    new Vue({
+        el : "#box",
+        data:{
+            title:"今天要下雨了",
+            img:"img/2.jpg"
+        },
+    });
+</script>
+</body>
+</html>

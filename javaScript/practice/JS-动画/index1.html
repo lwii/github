@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+	#box {
+		width:1200px;
+		height:700px;
+		margin:0 auto;
+		border:1px solid red;
+		position:relative;
+		background:pink;
+	}
+	#box .first {
+		width:100px;
+		height:100px;
+		border:1px solid yellow;
+		border-radius:50px;
+		background:blue;
+		position:absolute;
+		top:0;
+		left:0;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var box = document.querySelector("#box");
+		var box1 = document.querySelector(".first");
+		//获取随机数并返回
+		function random1(value1,value2){
+			return parseInt(Math.random() * (value2 - value1) + value1);
+		}
+		box1.style.left = random1(0,box.offsetWidth - box1.offsetWidth) + "px"; 	//box1的left值得到一个随机数 
+		box1.style.top = random1(0,box.offsetHeight - box1.offsetHeight) + "px";	//box1的top值得到一个随机数 
+		
+		move();
+		function move(){
+			var left = box1.offsetLeft;
+			var top1 = box1.offsetTop;
+			var judgeLeft = true;
+			var judgeTop = true;
+			var timer = setInterval(function(){
+				if(judgeLeft){
+					left++;
+				}else{
+					left--;
+				}
+				if(judgeTop){
+					top1++;
+				}else{
+					top1--;
+				}
+				if(top1 >= box.offsetHeight - box1.offsetHeight){
+					judgeTop = false;
+				}else if(top1 <= 0){
+					judgeTop = true;
+				}
+				if(left >= box.offsetWidth - box1.offsetWidth){
+					judgeLeft = false;
+				}else if(left <= 0) {
+					judgeLeft = true;
+				}			
+				box1.style.top = top1 + "px";
+				box1.style.left = left + "px";
+			},5);
+		}
+		
+	}
+</script>
+</head>
+<body>
+	<div id="box">
+    	<div class="first"></div>
+    </div>
+</body>
+</html>

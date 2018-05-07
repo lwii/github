@@ -1,0 +1,33 @@
+body{margin:0}
+#main{padding:0;border:none;left:20px;}
+#rightmenu{width:310px;padding-left:15px;border-left:1px dashed #CCCCCC;}
+div.commentform textarea{height:150px;}
+a[href^="//tongji.baidu.com"] {display:none;}
+.postTitle {margin-bottom: 20px;}
+
+/* 随笔档案 */
+#sidebar_categories ul {
+	width: 305px;
+        clear:both;
+}
+#sidebar_categories ul li {
+	width: 150px;
+	float: left;
+}
+#sidebar_categories h3 {
+  clear:both;
+  padding-top: 15px;
+}
+#sidebar_categories h3:last-child {
+  display: none;
+}
+#sidebar_scorerank {
+  clear: both;
+}
+#sidebar_scorerank h3 {
+  padding-top: 15px;
+}
+/* 屏蔽google广告 */
+#blog_ad_google, .c_ad_block{display:none;}
+#rightmenu .mySearch{display:none}
+.hide {display:none}

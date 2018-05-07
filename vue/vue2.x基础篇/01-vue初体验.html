@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        #person {
+            width:500px;
+            height:300px;
+            margin:0 auto;
+            background:black;
+        }
+        #person table {
+            width:100%;
+            height:100%;
+            border:1px solid red;
+            color:#fff;
+            text-align:center;
+        }
+        #person table thead td {
+            background: red;
+        }
+        ul,li{
+            list-style:none;
+        }
+        .active {
+            background:#111;
+            font-size:20px;
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+    <!--v-once:只渲染元素和组件一次。随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能-->
+<!--<div id="box">
+    <p v-once>初始的值:{{message}}</p>
+    <p>后面的值:{{message}}</p>
+    <input type="text" v-model="message"/>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el : "#box",
+        data:{
+            message: "hello world!"
+        }
+    });
+</script>-->
+
+    <!--
+        v-if:根据表达式的值的真假条件渲染元素。在切换时元素及它的数据绑定 / 组件被销毁并重建。如果元素是 <template> ，将提出它的内容作为条件块
+            v-if 和 v-show
+                v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
+                v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块
+                v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换
+                v-show 只是简单地切换元素的 CSS 属性 display。
+                v-show 的元素始终会被渲染并保留在 DOM 中
+        v-else:v-else 元素必须紧跟在带 v-if 或者 v-else-if 的元素的后面，否则它将不会被识别。
+        v-else-if:
+    -->
+   <!-- <div id="box">
+        你的考试成绩:<input type="text" v-model="score"/>
+        <p>输入成绩对应的等级是: <span v-if="score >= 90">优秀</span>
+                                 <span v-else-if="score >= 75">良好</span>
+                                 <span v-else-if="score >= 60">及格</span>
+                                 <span v-else>不及格</span></p>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#box",
+            data:{
+                score:90,
+            },
+        });
+    </script>-->
+   <!-- <div id="box">
+        <p v-if="show">显示的</p>
+        <p v-if="hide">不显示的</p>
+        <p v-if="height > 1.7">小花的身高:{{height}}m</p>
+        <p v-else>小花的身高不足1.7m</p>
+        <p v-show="show">显示的</p>
+        <p v-show="hide">不显示的</p>
+        <p v-show="height < 1.6">小明的身高:{{height}}m</p>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#box",
+            data:{
+                show:true,
+                hide:false,
+
+                height:1.68,
+            }
+
+        });
+    </script>-->
+<!--v-for:遍历数据:如:Array | Object | number | string-->
+<!--<div id="person">
+    <table>
+        <thead>
+            <tr>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for=" p in persons">
+                <td>{{p.name}}</td>
+                <td>{{p.age}}</td>
+                <td>{{p.sex}}</td>
+            </tr>
+        </tbody>
+    </table>
+    &lt;!&ndash;<p v-for="(score, index) in scores">{{index + ":" + score}}</p>&ndash;&gt;
+    &lt;!&ndash;<p v-for="(val, key) in dog">{{key + ":" + val}}</p>&ndash;&gt;
+    &lt;!&ndash;<p v-for="n in name">{{n}}</p>&ndash;&gt;
+    &lt;!&ndash;<p v-for="num in number">{{num}}</p>&ndash;&gt;
+</div>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el : "#person",
+        data:{
+            scores: [69,73,82,99],      //array
+            dog:{name:"小黑",age:3,color:"black"},//object
+            name:"hello",         //string
+            number:"19",
+            persons:[
+                {name:"张三",age:17,sex:"男"},
+                {name:"李四",age:23,sex:"女"},
+                {name:"王五",age:32,sex:"女"},
+                {name:"赵六",age:41,sex:"男"}
+            ],
+        }
+    });
+</script>-->
+<!--    &lt;!&ndash; v-bind:动态地绑定一个或多个特性，或一个组件 prop 到表达式&ndash;&gt;
+<div id="box" >
+    <img src="img/1.jpg" alt=""/>
+    <img v-bind:src="imgSrc" alt=""/>
+
+</div>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el : "#box",
+        data:{
+            imgSrc: "img/2.jpg",
+
+        }
+    });
+</script>-->
+<!--<div id="box">
+    <ul v-for="(ce, index) in college">
+        <li :class="index === activeIndex ? 'active':''">{{ce}}</li>
+
+    </ul>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el : "#box",
+        data:{
+              college: ["ios学院","java学院","c++学院","javascript学院","php学院","c#学院"],
+              activeIndex:1
+        }
+    });
+
+</script>-->
+<div id="box">
+    <p :style="{color:fontColor}">{{message}}</p>
+    <button v-on:click="message = '今天很冷啊'">改变内容</button>
+    <button @click="change()">改变内容1</button>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el : "#box",
+        data:{
+            message: "今天的天气很好",
+            fontColor:"red",
+        },
+        methods:{
+            change:function(){
+                alert("");
+            }
+        },
+    });
+</script>
+</body>
+
+</html>

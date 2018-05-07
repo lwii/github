@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>拖拽</title>
+<style>
+	#box {
+		width:100px;
+		height:100px;
+		background:green;
+		position:absolute;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var box = document.querySelector("#box");
+		box.onmousedown = function(e){
+			var myEv = e || window.event;
+			var boxX = myEv.offsetX;
+			var boxY = myEv.offsetY;
+			window.onmousemove = function(e){
+				var ev = e || window.event;
+				var x = ev.clientX;
+				var y = ev.clientY;
+				
+				box.style.left = x - boxX + "px";
+				box.style.top = y - boxY + "px";
+			}
+		}
+		box.onmouseup = function(){
+			window.onmousemove = null;
+		}
+	}
+</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script>
+    //递归-N个数的累加
+    function fn1(n){
+        if(n === 1) return 1;
+        console.log(n +  "+" + fn1(n - 1));
+        //return n + fn1(n-1);
+    }
+    fn1(100);
+    /*
+    //递归-从前有座山,山上有座庙
+    var num = 100;
+    function fn(){
+        num--;
+        if(num >= 0 ){
+            console.log("从前有座山,山上有座庙" + num);
+            fn();
+        }
+    }
+    fn();
+     */
+</script>
+</html>

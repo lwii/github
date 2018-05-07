@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://www.cnblogs.com/snandy/p/4773184.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript中知而不全的this - snandy - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./JavaScript中知而不全的this - snandy - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./JavaScript中知而不全的this - snandy - 博客园_files/bundle-SimpleClear.css">
+<link type="text/css" rel="stylesheet" href="./JavaScript中知而不全的this - snandy - 博客园_files/69634.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./JavaScript中知而不全的this - snandy - 博客园_files/bundle-SimpleClear-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/snandy/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/snandy/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/snandy/wlwmanifest.xml">
+<script async="" src="./JavaScript中知而不全的this - snandy - 博客园_files/analytics.js.下载"></script><script src="./JavaScript中知而不全的this - snandy - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+<script type="text/javascript">var currentBlogApp = 'snandy', cb_enable_mathjax=true;var isLogined=false;</script>
+<script type="text/x-mathjax-config;executed=true">
+    MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'blogpost-body', processEscapes: true },
+        TeX: { 
+            equationNumbers: { autoNumber: ['AMS'], useLabelIds: true }, extensions: ['extpfeil.js'] },
+            'HTML-CSS': { linebreaks: { automatic: true } },
+            SVG: { linebreaks: { automatic: true } }
+        });
+    </script><script src="./JavaScript中知而不全的this - snandy - 博客园_files/MathJax.js.下载"></script>
+<script src="./JavaScript中知而不全的this - snandy - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<a name="top"></a>
+
+<div id="main">
+<div id="header">
+<h1><a id="Header1_HeaderTitle" href="http://www.cnblogs.com/snandy/"><span style="font-size: 35px; color: gray;">Snandy</span></a></h1>
+<p id="tagline"><span style="margin-left:20px;font-size:12px;"> If you cannot hear the sound of the genuine in you, you will all of your life spend your days on the ends of strings that somebody else pulls.</span></p></div>
+
+<div id="post_detail">
+<div class="post">
+    <h2 class="postTitle"><a id="cb_post_title_url" href="http://www.cnblogs.com/snandy/p/4773184.html">JavaScript中知而不全的this</a></h2>
+    <div class="postText"><div id="cnblogs_post_body" class="blogpost-body"><p>都说 JavaScript 是一种很灵活的语言，这其实也可以说它是一个混乱的语言。它把 <a href="https://en.wikipedia.org/wiki/Functional_programming" target="_blank">函数式编程 </a>和 <a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">面向对象编程 </a>糅合一起，再加上 <a href="https://en.wikipedia.org/wiki/Dynamic_programming_language" target="_blank">动态语言 </a>特性，简直强大无比（其实是不能和C++比的，^_^ ）。</p>
+<p>&nbsp;</p>
+<p>这里的主题是 this ，不扯远了。this 本身原本很简单，总是指向类的当前实例，this 不能赋值。这前提是说 this 不能脱离 类/对象 来说，也就是说 this 是面向对象语言里常见的一个关键字。说的极端点，如果你编写的 JS 采用函数式写法，而不是面向对象式，你所有的代码里 this 会少很多，甚至没有。记住这一点，当你使用 this 时，你应该是在使用对象/类 方式开发，否则 this 只是函数调用时的副作用。</p>
+<p>&nbsp;</p>
+<p>JS 里的 this</p>
+<ul>
+<li>在 function 内部被创建</li>
+<li>指向调用时所在函数所绑定的对象（拗口）</li>
+<li>this 不能被赋值，但可以被 call/apply &nbsp;改变</li>
+</ul>
+<p>&nbsp;</p>
+<p>以前用 this 时经常担心，不踏实，你不知道它到底指向谁？ 这里把它所有用到的地方列出</p>
+<ol>
+<li>this 和构造器</li>
+<li>this 和对象</li>
+<li>this 和函数</li>
+<li>全局环境的 this</li>
+<li>this 和 DOM/事件</li>
+<li>this 可以被 call/apply 改变</li>
+<li>me/self/that/_this 暂存 this</li>
+<li>ES5 中新增的 bind 和 this</li>
+<li>ES6 箭头函数(arrow function) 和 this</li>
+</ol>
+<p>&nbsp;</p>
+<h3>1. this 和构造器</h3>
+<p>this 本身就是类定义时构造器里需要用到的，和构造器在一起再自然不过。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_730963" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript comments">/**</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;</code><code class="javascript comments">* 页签</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;</code><code class="javascript comments">* </code></div><div class="line number4 index3 alt1"><code class="javascript spaces">&nbsp;</code><code class="javascript comments">* @class Tab</code></div><div class="line number5 index4 alt2"><code class="javascript spaces">&nbsp;</code><code class="javascript comments">* @param nav {string} 页签标题的class</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;</code><code class="javascript comments">* @param content {string} 页面内容的class</code></div><div class="line number7 index6 alt2"><code class="javascript spaces">&nbsp;</code><code class="javascript comments">*</code></div><div class="line number8 index7 alt1"><code class="javascript spaces">&nbsp;</code><code class="javascript comments">*/</code></div><div class="line number9 index8 alt2"><code class="javascript keyword">function</code> <code class="javascript plain">Tab(nav, content) {</code></div><div class="line number10 index9 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">this</code><code class="javascript plain">.nav = nav</code></div><div class="line number11 index10 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">this</code><code class="javascript plain">.content = content</code></div><div class="line number12 index11 alt1"><code class="javascript plain">}</code></div><div class="line number13 index12 alt2">&nbsp;</div><div class="line number14 index13 alt1"><code class="javascript plain">Tab.prototype.getNav = </code><code class="javascript keyword">function</code><code class="javascript plain">() {</code></div><div class="line number15 index14 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">return</code> <code class="javascript keyword">this</code><code class="javascript plain">.nav;</code></div><div class="line number16 index15 alt1"><code class="javascript plain">};</code></div><div class="line number17 index16 alt2"><code class="javascript plain">Tab.prototype.setNav = </code><code class="javascript keyword">function</code><code class="javascript plain">(nav) {</code></div><div class="line number18 index17 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">this</code><code class="javascript plain">.nav = nav;</code></div><div class="line number19 index18 alt2"><code class="javascript plain">};</code></div><div class="line number20 index19 alt1"><code class="javascript plain">Tab.prototype.add = </code><code class="javascript keyword">function</code><code class="javascript plain">() {</code></div><div class="line number21 index20 alt2"><code class="javascript plain">};</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>按照 JavaScript 的<a href="http://www.cnblogs.com/snandy/archive/2011/03/06/1971764.html" target="_blank">习惯</a>， this 应该挂属性/字段，方法都应该放在原型上。</p>
+<p>&nbsp;</p>
+<h3>2. this 和对象</h3>
+<p>JS 中的对象不用类也可以创建，有人可能奇怪，类是对象的模板，对象都是从模板里 copy 出来的，没有类怎么创建对象？ JS <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank">的确可以</a>，并且你完全可以写上万行功能代码而不用写一个类。话说 OOP 里说的是面向对象编程，也没说面向类编程，是吧 ^_^ 。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_790468" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript keyword">var</code> <code class="javascript plain">tab = {</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">nav: </code><code class="javascript string">''</code><code class="javascript plain">,</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">content: </code><code class="javascript string">''</code><code class="javascript plain">, </code></div><div class="line number4 index3 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">getNav: </code><code class="javascript keyword">function</code><code class="javascript plain">() {</code></div><div class="line number5 index4 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">return</code> <code class="javascript keyword">this</code><code class="javascript plain">.nav;</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">},</code></div><div class="line number7 index6 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">setNav: </code><code class="javascript keyword">function</code><code class="javascript plain">(n) {</code></div><div class="line number8 index7 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">this</code><code class="javascript plain">.nav = n;</code></div><div class="line number9 index8 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">}</code></div><div class="line number10 index9 alt1"><code class="javascript plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;</p>
+<h3>3. this 和函数</h3>
+<p>首先，this 和独立的函数放在一起是没有意义的，前面也提到过 this 应该是和面向对象相关的。<a href="http://www.cnblogs.com/snandy/archive/2011/08/29/2153871.html" target="_blank">纯粹的函数</a>只是一个低级别的抽象，封装和复用。如下</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_315906" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript keyword">function</code> <code class="javascript plain">showMsg() {</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">alert(</code><code class="javascript keyword">this</code><code class="javascript plain">.message)</code></div><div class="line number3 index2 alt2"><code class="javascript plain">}</code></div><div class="line number4 index3 alt1"><code class="javascript plain">showMsg() </code><code class="javascript comments">// undefined</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>定义 showMsg，然后以<a href="http://www.cnblogs.com/snandy/archive/2011/03/05/1971581.html" target="_blank">函数方式调用</a>，this.message 是 undefined。因此坚决杜绝在 纯函数内使用 this，但有时候会这么写，调用方式使用 call/apply</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_384525" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript keyword">function</code> <code class="javascript plain">showMsg() {</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">alert(</code><code class="javascript keyword">this</code><code class="javascript plain">.message)</code></div><div class="line number3 index2 alt2"><code class="javascript plain">}</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="javascript keyword">var</code> <code class="javascript plain">m1 = {</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">message: </code><code class="javascript string">'输入的电话号码不正确'</code></div><div class="line number7 index6 alt2"><code class="javascript plain">}</code></div><div class="line number8 index7 alt1"><code class="javascript keyword">var</code> <code class="javascript plain">m2 = {</code></div><div class="line number9 index8 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">message: </code><code class="javascript string">'输入的身份证号不正确'</code></div><div class="line number10 index9 alt1"><code class="javascript plain">}</code></div><div class="line number11 index10 alt2">&nbsp;</div><div class="line number12 index11 alt1"><code class="javascript plain">showMsg.call(m1) </code><code class="javascript comments">// '输入的电话号码不正确'</code></div><div class="line number13 index12 alt2"><code class="javascript plain">showMsg.call(m2) </code><code class="javascript comments">// '输入的身份证号不正确'</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>用这种方式可以节省一些代码量，比如当两个 类/对象 有一共相似的方法时，不必写两份，只要定义一个，然后将其绑定在各自的原型和对象上。这时候其实你还是在使用对象或类（方式1/2），只是间接使用罢了。</p>
+<p>&nbsp;</p>
+<h3>4. 全局环境的 this</h3>
+<p>前面提到 this 是 “<span style="color: #ff00ff;"><strong>指向调用时所在函数所绑定的对象</strong></span>”， 这句话拗口但绝对正确，没有一个多余的字。全局环境中有不同的宿主对象，浏览器环境中是 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/window" target="_blank">window</a>， node 环境中是 <a href="https://nodejs.org/api/globals.html" target="_blank">global</a>。这里重点说下浏览器环境中的 this。</p>
+<p>&nbsp;</p>
+<p>浏览器环境中非函数内 this 指向 window</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_401993" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">alert(window=== </code><code class="javascript keyword">this</code><code class="javascript plain">) </code><code class="javascript comments">// true</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>因此你会看很很多开源 JS lib 这么写</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_11827" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">(</code><code class="javascript keyword">function</code><code class="javascript plain">() {</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript comments">// ...</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number4 index3 alt1"><code class="javascript plain">})(</code><code class="javascript keyword">this</code><code class="javascript plain">);</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>或这样写</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_643808" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">(</code><code class="javascript keyword">function</code><code class="javascript plain">() {</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript comments">// ...</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;</code>&nbsp;</div><div class="line number4 index3 alt1"><code class="javascript plain">}).call(</code><code class="javascript keyword">this</code><code class="javascript plain">);</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>比如 <a href="http://underscorejs.org/underscore.js" target="_blank">underscore</a>&nbsp;和 <a href="https://github.com/jrburke/requirejs/blob/master/require.js" target="_blank">requirejs</a>，大意是把全局变量 window 传入匿名函数内缓存起来，避免直接访问。至于为啥要缓存，这跟 JS 作用域链有关系，读取越外层的标识符性能会越差。请自行查阅相关知识，再说就扯远了。</p>
+<p>&nbsp;</p>
+<p>浏览器中比较坑人，非函数内直接使用 var 声明的变量默认为全局变量，且默认挂在 window 上作为属性。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_46320" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript keyword">var</code> <code class="javascript plain">andy = </code><code class="javascript string">'刘德华'</code></div><div class="line number2 index1 alt1"><code class="javascript plain">alert(andy === window.andy) </code><code class="javascript comments">// true</code></div><div class="line number3 index2 alt2"><code class="javascript plain">alert(andy === </code><code class="javascript keyword">this</code><code class="javascript plain">.andy) </code><code class="javascript comments">// true</code></div><div class="line number4 index3 alt1"><code class="javascript plain">alert(window.andy === </code><code class="javascript keyword">this</code><code class="javascript plain">.andy) </code><code class="javascript comments">// true</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;</p>
+<p>因为这个特性，有些笔试题如</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_390725" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript keyword">var</code> <code class="javascript plain">x = 10;</code></div><div class="line number2 index1 alt1"><code class="javascript keyword">function</code> <code class="javascript plain">func() {</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">alert(</code><code class="javascript keyword">this</code><code class="javascript plain">.x)</code></div><div class="line number4 index3 alt1"><code class="javascript plain">}</code></div><div class="line number5 index4 alt2"><code class="javascript keyword">var</code> <code class="javascript plain">obj = {</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">x: 20,</code></div><div class="line number7 index6 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">fn: </code><code class="javascript keyword">function</code><code class="javascript plain">() {</code></div><div class="line number8 index7 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">alert(</code><code class="javascript keyword">this</code><code class="javascript plain">.x)</code></div><div class="line number9 index8 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">}</code></div><div class="line number10 index9 alt1"><code class="javascript plain">}</code></div><div class="line number11 index10 alt2"><code class="javascript keyword">var</code> <code class="javascript plain">fn = obj.fn</code></div><div class="line number12 index11 alt1"><code class="javascript plain">func() </code><code class="javascript comments">// 10</code></div><div class="line number13 index12 alt2"><code class="javascript plain">fn() </code><code class="javascript comments">// 10</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>没错，最终输出的都是全局的 10。永远记住这一点：判断 this 指向谁，看执行时而非定义时，只要函数(function)没有绑定在对象上调用，它的 this 就是 window。</p>
+<p>&nbsp;</p>
+<h3>5. this 和 DOM/事件</h3>
+<p>W3C 把 DOM 实现成了各种节点，节点嵌套一起形成 DOM tree。节点有不同类型，如文本节点，元素节点等10多种。元素节点又分成了很多，对写HTML的人来说便是很熟悉的标签（Tag），如 <a href="http://www.w3.org/2003/01/dom2-javadoc/org/w3c/dom/html2/HTMLDivElement.html" target="_blank">div</a>，<a href="http://www.w3.org/2003/01/dom2-javadoc/org/w3c/dom/html2/HTMLUListElement.html" target="_blank">ul</a>，<a href="http://www.w3.org/2003/01/dom2-javadoc/org/w3c/dom/html2/HTMLLabelElement.html" target="_blank">label</a> 等。 看 W3C 的 <a href="http://www.w3.org/2003/01/dom2-javadoc/org/w3c/dom/Element.html" target="_blank">API 文档</a>，会发现它完全是按照面向对象方式实现的各种 API，有 interface，extends 等。如</p>
+<p><img src="./JavaScript中知而不全的this - snandy - 博客园_files/114013-20150901051237013-1926027440.png" alt="" width="900"></p>
+<p>看到了吧，这是用 Java 写的，既然是用面向对象方式实现的API，一定有类/对象（废话^_^），有 类/对象，则一定有 this （别忘了这篇文章的中心主题）。所有的 HTML tag 类命名如 HTMLXXXElement，如</p>
+<ul>
+<li><a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-22445964" target="_blank">HTMLDivElement</a></li>
+<li><a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-13691394" target="_blank">HTMLLabelElement</a></li>
+<li><a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-6043025" target="_blank">HTMLInputElement</a></li>
+<li>...</li>
+</ul>
+<p>前面说过 this 是指向当前类的实例对象，对于这些 tag 类来说，不看其源码也知它们的很多方法内部用到的 this 是指向自己的。 有了这个结论，写 HTML 和 JS 时， this 就清晰了很多。</p>
+<p>&nbsp;</p>
+<p>示例A</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_967691" class="syntaxhighlighter  html"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="html comments">&lt;!-- this 指向 div --&gt;</code></div><div class="line number2 index1 alt1"><code class="html plain">&lt;</code><code class="html keyword">div</code> <code class="html plain">onclick="alert(this)"&gt;&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>　　</p>
+<p>示例B</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_263109" class="syntaxhighlighter  html"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="html plain">&lt;</code><code class="html keyword">div</code> <code class="html plain">id="nav"&gt;&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div><div class="line number2 index1 alt1"><code class="html plain">&lt;</code><code class="html keyword">script</code><code class="html plain">&gt;</code></div><div class="line number3 index2 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">nav.onclick = function() {</code></div><div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">alert(this) // 指向div#nav</code></div><div class="line number5 index4 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">}</code></div><div class="line number6 index5 alt1"><code class="html plain">&lt;/</code><code class="html keyword">script</code><code class="html plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;</p>
+<p>示例C</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_905755" class="syntaxhighlighter  html"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="html plain">$('#nav').on('click', function() {</code></div><div class="line number2 index1 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">alert(this) // 指向 nav</code></div><div class="line number3 index2 alt2"><code class="html plain">})</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;</p>
+<p>以上三个示例可以看到，在给元素节点添加事件的时候，其响应函数（handler）执行时的 this 都指向 Element 节点自身。jQuery 也保持了和标准一致，但却让人迷惑，按 “<span style="color: #ff00ff;"><strong>this&nbsp;指向调用时所在函数所绑定的对象</strong></span>” 这个定义，jQuery 事件 handler 里的 this，应该指向 jQuery 对象，而非 DOM 节点。因此你会发现在用 jQuery 时，经常需要把事件 handler 里的 element 在用 $ 包裹下变成 jQuery 对象后再去操作。比如</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_459097" class="syntaxhighlighter  html"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="html plain">$('#nav').on('click', function() {</code></div><div class="line number2 index1 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">var $el = $(this) // 再次转为 jQuery 对象，如果 this 直接为 jQuery 对象更好</code></div><div class="line number3 index2 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">$el.attr('data-x', x)</code></div><div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">$el.attr('data-x', x)</code></div><div class="line number5 index4 alt2"><code class="html plain">})</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;</p>
+<p>有人可能有如下的疑问</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_757844" class="syntaxhighlighter  html"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="html plain">&lt;</code><code class="html keyword">div</code> <code class="html plain">id="nav" onclick="getId()"&gt;ddd&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div><div class="line number2 index1 alt1"><code class="html plain">&lt;</code><code class="html keyword">script</code><code class="html plain">&gt;</code></div><div class="line number3 index2 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">function getId() {</code></div><div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">alert(this.id)</code></div><div class="line number5 index4 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">}</code></div><div class="line number6 index5 alt1"><code class="html plain">&lt;/</code><code class="html keyword">script</code><code class="html plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>点击 div 后，为什么 id 是 undefined，不说是指向的 当前元素 div 吗？ 如果记住了前面提到的一句话，就很清楚为啥是 undefined，把这句话再贴出来。</p>
+<blockquote>
+<p><span style="color: #ff00ff;"><strong><em>判断 this 指向谁，看执行时而非定义时，只要函数(function)没有绑定在对象上调用，它的 this 就是 window</em></strong></span></p>
+</blockquote>
+<p>这里函数 getId 调用时没有绑定在任何对象上，可以理解成这种结构</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_885463" class="syntaxhighlighter  html"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="html plain">div.onclick = function() {</code></div><div class="line number2 index1 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">getId()</code></div><div class="line number3 index2 alt2"><code class="html plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>getId 所处匿名函数里的 this 是 div，但 getId 自身内的 this 则不是了。 当然 ES5 严格模式下还是有个<a href="http://www.cnblogs.com/snandy/archive/2012/03/01/2373243.html" target="_blank">坑</a>。</p>
+<p>&nbsp;</p>
+<h3>6. this 可以被 call/apply 改变</h3>
+<p>call/apply 是函数调用的另外两种方式，两者的第一个参数都可以改变函数的上下文 this。call/apply 是 JS 里动态语言特性的表征。动态语言通俗的定义</p>
+<blockquote>
+<p>程序在运行时可以改变其结构，新的函数可以被引进，已有的函数可以被删除，即程序在运行时可以发生结构上的变化</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>通常有以下几点特征表示它为动态语言</p>
+<ol>
+<li>动态的数据类型</li>
+<li>动态的函数执行</li>
+<li>动态的方法重写</li>
+</ol>
+<p>动态语言多从世界第二门语言 LISP 发展而来，如死去的 SmallTalk/VB，目前还活着的 Perl/Python， 以及还流行的 Ruby/JavaScript。JS 里动态数据类型的体现便是弱类型，执行的时候才去分析标识符的类型。函数动态执行体现为 eval，call/aply。动态方法重写则体现在 JS 原型可重写。不扯远，这里重点说下 call/apply 对 this 的影响。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_605411" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript keyword">var</code> <code class="javascript plain">m1 = {</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">message: </code><code class="javascript string">'This is A'</code></div><div class="line number3 index2 alt2"><code class="javascript plain">}&nbsp; </code></div><div class="line number4 index3 alt1"><code class="javascript keyword">var</code> <code class="javascript plain">m2 = {</code></div><div class="line number5 index4 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">message: </code><code class="javascript string">'This is B'</code></div><div class="line number6 index5 alt1"><code class="javascript plain">}&nbsp;&nbsp; </code></div><div class="line number7 index6 alt2">&nbsp;</div><div class="line number8 index7 alt1"><code class="javascript keyword">function</code> <code class="javascript plain">showMsg() {</code></div><div class="line number9 index8 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">alert(</code><code class="javascript keyword">this</code><code class="javascript plain">.message)</code></div><div class="line number10 index9 alt1"><code class="javascript plain">}</code></div><div class="line number11 index10 alt2">&nbsp;</div><div class="line number12 index11 alt1"><code class="javascript plain">showMsg() </code><code class="javascript comments">// undefined</code></div><div class="line number13 index12 alt2"><code class="javascript plain">showMsg.call(m1) </code><code class="javascript comments">// 'This is A'</code></div><div class="line number14 index13 alt1"><code class="javascript plain">showMsg.call(m2) </code><code class="javascript comments">// 'This is B'</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>可以看到单独调用 showMsg 返回的是 undefined，只有将它绑定到具有 message 属性的对象上执行时才有意义。发挥想象力延伸下，如果把一些通用函数写好，可以任意绑定在多个类的原型上，这样动态的给类添加了一些方法，还节省了代码。这是一种强大的功能，也是动态语言的强表现力的体现。</p>
+<p>经常会听到转向 Ruby 或 Python 的人提到“编程的乐趣”，这种乐趣是源自动态语言更接近人的思维（而不是机器思维），更符合业务流程而不是项目实现流程。同样一个功能，动态语言可以用更小的代码量来实现。动态语言对程序员生产力的提高，是其大行其道的主要原因。</p>
+<p>性能方面，动态语言没有太大的优势，但动态语言的理念是：优化人的时间而不是机器的时间。提高开发者的生产力，宁肯牺牲部分的程序性能或者购买更高配置的硬件。随着 IT 业的不断发展和摩尔定律的作用，硬件相对于<a href="http://book.douban.com/subject/1108725/" target="_blank">人件</a>一直在贬值，这个理念便有了合理的现实基础。</p>
+<p>&nbsp;</p>
+<p>JS 里的 call/apply 在任何一个流行的 lib 里都会用到，但几乎就是两个作用</p>
+<ol>
+<li>配合写类工具实现OOP，如 <a href="https://github.com/mootools/mootools-core/blob/master/Source/Class/Class.js" target="_blank">mootools</a>, <a href="https://github.com/darlanalves/ClassJS/blob/master/src/class/class.js" target="_blank">ClassJS</a>, <a href="https://github.com/snandy/class/blob/master/src/class.js" target="_blank">class.js</a>,</li>
+<li>修复DOM事件里的 this，如 <a href="https://github.com/jquery/jquery/blob/master/src/event.js" target="_blank">jQuery</a>, <a href="https://github.com/kbjr/Events.js/blob/master/events.js" target="_blank">events.js</a></li>
+</ol>
+<p>&nbsp;</p>
+<p>关于 call 和 apply 复用：<a href="http://www.cnblogs.com/snandy/p/3254940.html" target="_blank">利用apply和arguments复用方法</a></p>
+<p>关于 call 和 apply 的性能问题参考：&nbsp;<a href="http://www.cnblogs.com/snandy/archive/2013/05/23/3091258.html" target="_blank">冗余换性能-从Backbone的triggerEvents说开了去</a></p>
+<p>&nbsp;</p>
+<h3>7. me/self/that/_this 暂存 this</h3>
+<p>如果采用 OOP 方式写 JS 代码，无可避免的会用到 this，方法内会访问类的内部属性（字段），也可能会调用类的另一个方法。当类的方法内又有一个 function 时，比如浏览器端开发经常遇见的给 DOM 元素添加事件，这时如果事件处理器（handler）中的想调用类的一个方法，此时 handler 内的 this 是 dom 元素而非类的当前对象。这个时候，需要把 this 暂存，开发者发挥着自己的聪明才智留下了几种经典的命名 me, self, that, _this。如</p>
+<p><img src="./JavaScript中知而不全的this - snandy - 博客园_files/114013-20150907105352747-1002421052.png" alt="" width="410"></p>
+<p>&nbsp;</p>
+<p>又如这是我曾经采用 OOP 方式写过的一段代码</p>
+<p><img src="./JavaScript中知而不全的this - snandy - 博客园_files/114013-20150907104920356-1939509237.png" alt=""></p>
+<p>一般会在每个方法的第一句就把 this 暂存下来。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>8. ES5 中新增的 bind 和 this</h3>
+<p>上面 6 里提到 call/apply 在 JS 里体现动态语言特性及动态语言的流行原因，其在 JS 用途如此广泛。ES5发布时将其采纳，提了一个更高级的方法 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind" target="_blank">bind</a>。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_522980" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript keyword">var</code> <code class="javascript plain">modal = {</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">message: </code><code class="javascript string">'This is A'</code></div><div class="line number3 index2 alt2"><code class="javascript plain">}</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="javascript keyword">function</code> <code class="javascript plain">showMsg() {</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">alert(</code><code class="javascript keyword">this</code><code class="javascript plain">.message)</code></div><div class="line number7 index6 alt2"><code class="javascript plain">}</code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="javascript keyword">var</code> <code class="javascript plain">otherShowMsg = showMsg.bind(modal)</code></div><div class="line number10 index9 alt1"><code class="javascript plain">otherShowMsg() </code><code class="javascript comments">// 'This is A'</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>因为是 ES5 才加的，低版本的IE不支持，可以<a href="http://www.cnblogs.com/snandy/archive/2011/03/22/1990935.html" target="_blank">修复下Function.prototype</a>。bind 只是 call/apply 的高级版，其它没什么特殊的。</p>
+<p>&nbsp;</p>
+<h3>9.&nbsp;ES6 箭头函数(arrow function) 和 this</h3>
+<p>ES6 在今年的 6月18日 正式发布（恰<a href="http://baike.baidu.com/link?url=yvyDYY4dkDkTf2jWf5bmyuU0SM_PaEhTOG6jwKsZjY3U-XIhVjTo3ZNtqXNHRD_r7ku9GuI4oisjX5hCy-gWa_" target="_blank">京东店庆日</a>同一天，^_^），它带来的另一种类型的函数 - 箭头函数。箭头函数的一个重要特征就是颠覆了上面的一句话，再贴一次</p>
+<blockquote>
+<p><span style="color: #ff00ff;"><strong><em>判断 this 指向谁，看执行时而非定义时，只要函数(function)没有绑定在对象上调用，它的 this 就是 window</em></strong></span></p>
+</blockquote>
+<p>&nbsp;</p>
+<p>是的，前面一直用这句话来判断 this 的指向，在箭头函数里前面半句就失效了。箭头函数的特征就是，定义在哪，this 就指向那。即箭头函数定义在一个对象里，那箭头函数里的 this 就指向该对象。如下</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_134644" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript keyword">var</code> <code class="javascript plain">book = {</code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">author: </code><code class="javascript string">'John Resig'</code><code class="javascript plain">,</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">init:&nbsp; </code><code class="javascript keyword">function</code><code class="javascript plain">() {</code></div><div class="line number4 index3 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">document.onclick = ev =&gt; {</code></div><div class="line number5 index4 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">alert(</code><code class="javascript keyword">this</code><code class="javascript plain">.author) ; </code><code class="javascript comments">// 这里的 this 不是 document 了</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">}</code></div><div class="line number7 index6 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">}</code></div><div class="line number8 index7 alt1"><code class="javascript plain">};</code></div><div class="line number9 index8 alt2"><code class="javascript plain">book.init()</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>对象 book 里有一个属性 author， 有一个 init 方法， 给 document 添加了一个点击事件，如果是传统的函数，我们知道 this 指向应该是 document，但箭头函数会指向当前对象 book。</p>
+<p>箭头函数让 JS 回归自然和简单，函数定义在哪它 this 就指向哪，定义在对象里它指向该对象，定义在类的原型上，就指向该类的实例，望文知意这样更容易理解。</p>
+<p>&nbsp;</p>
+<h3>总结：&nbsp;</h3>
+<p>函数的上下文 this 是 JS 里不太好理解的，在于 JS 函数自身有<a href="http://www.cnblogs.com/snandy/p/4763324.html" target="_blank">多种用途</a>。目的是实现各种语言范型（面向对象，函数式，动态）。this 本质是和面向对象联系的，和写类，对象关联一起的， 和“函数式”没有关系的。如果你采用过程式函数式开发，完全不会用到一个 this。 但在浏览器端开发时却无可避免的会用到 this，这是因为浏览器对象模型（DOM）本身采用面向对象方式开发，Tag 实现为一个个的类，类的方法自然会引用类的其它方法，引用方式必然是用 this。当你给DOM对象添加事件时，回调函数里引用该对象就只能用 this 了。</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(4773184,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;0c14c732-6311-df11-ba8f-001cf0cd104b&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./JavaScript中知而不全的this - snandy - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./JavaScript中知而不全的this - snandy - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/snandy/" target="_blank"><img src="./JavaScript中知而不全的this - snandy - 博客园_files/20160103213724.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/snandy/">snandy</a><br>
+            <a href="http://home.cnblogs.com/u/snandy/followees">关注 - 18</a><br>
+            <a href="http://home.cnblogs.com/u/snandy/followers">粉丝 - 2767</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor">荣誉：<a href="http://www.cnblogs.com/expert/" target="_blank">推荐博客</a></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;0c14c732-6311-df11-ba8f-001cf0cd104b&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(4773184,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">15</span>
+    </div>
+    <div class="buryit" onclick="votePost(4773184,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/snandy/p/4763324.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/snandy/p/4763324.html" title="发布于2015-08-28 09:12">JavaScript中function的多义性</a><br><a href="http://www.cnblogs.com/snandy/p/4846817.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/snandy/p/4846817.html" title="发布于2015-09-29 17:18">CSS3动画事件</a><br></div>
+</div>
+
+</div>
+    <p class="postfoot">posted on <span id="post-date">2015-09-01 09:03</span> <a href="http://www.cnblogs.com/snandy/">snandy</a> 阅读(<span id="post_view_count">6851</span>) 评论(<span id="post_comment_count">7</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=4773184" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/snandy/p/4773184.html#" onclick="AddToWz(4773184);return false;">收藏</a></p>
+</div>
+<script type="text/javascript">var allowComments=true,cb_blogId=69634,cb_entryId=4773184,cb_blogApp=currentBlogApp,cb_blogUserGuid='0c14c732-6311-df11-ba8f-001cf0cd104b',cb_entryCreatedDate='2015/9/1 9:03:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<a name="评论"></a>
+<div id="comments">
+<h3>评论</h3>
+	
+	
+			<h4>
+				<a href="https://www.cnblogs.com/snandy/p/4773184.html#3258048" class="layer">#1楼</a><a name="3258048" id="comment_anchor_3258048"></a>
+					<span>
+						 <span class="comment_date">2015-09-01 10:03</span>
+					</span>
+				<a id="a_comment_author_3258048" href="http://www.cnblogs.com/ameol/" target="_blank">圣之贤者</a> <a href="http://msg.cnblogs.com/send/%E5%9C%A3%E4%B9%8B%E8%B4%A4%E8%80%85" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</h4>
+			<p>
+				</p><div id="comment_body_3258048" class="blog_comment_body">顶</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3258048,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3258048,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3258048_avatar" style="display:none;">http://pic.cnblogs.com/face/404599/20130416135223.png</span>
+				&nbsp;&nbsp;<span class="comment_actions"></span>
+			<p></p>
+		
+			<h4>
+				<a href="https://www.cnblogs.com/snandy/p/4773184.html#3258084" class="layer">#2楼</a><a name="3258084" id="comment_anchor_3258084"></a>
+					<span>
+						 <span class="comment_date">2015-09-01 10:50</span>
+					</span>
+				<a id="a_comment_author_3258084" href="http://www.cnblogs.com/wilber2013/" target="_blank">田小计划</a> <a href="http://msg.cnblogs.com/send/%E7%94%B0%E5%B0%8F%E8%AE%A1%E5%88%92" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</h4>
+			<p>
+				</p><div id="comment_body_3258084" class="blog_comment_body">学习了  多谢分享</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3258084,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3258084,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3258084_avatar" style="display:none;">http://pic.cnblogs.com/face/593627/20141129160221.png</span>
+				&nbsp;&nbsp;<span class="comment_actions"></span>
+			<p></p>
+		
+			<h4>
+				<a href="https://www.cnblogs.com/snandy/p/4773184.html#3258124" class="layer">#3楼</a><a name="3258124" id="comment_anchor_3258124"></a>
+					<span>
+						 <span class="comment_date">2015-09-01 11:29</span>
+					</span>
+				<a id="a_comment_author_3258124" href="http://www.cnblogs.com/zjczoo/" target="_blank">早起的菜鸟</a> <a href="http://msg.cnblogs.com/send/%E6%97%A9%E8%B5%B7%E7%9A%84%E8%8F%9C%E9%B8%9F" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</h4>
+			<p>
+				</p><div id="comment_body_3258124" class="blog_comment_body">顶大神！！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3258124,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3258124,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3258124_avatar" style="display:none;">http://pic.cnblogs.com/face/u303645.png?id=18134639</span>
+				&nbsp;&nbsp;<span class="comment_actions"></span>
+			<p></p>
+		
+			<h4>
+				<a href="https://www.cnblogs.com/snandy/p/4773184.html#3277745" class="layer">#4楼</a><a name="3277745" id="comment_anchor_3277745"></a>
+					<span>
+						 <span class="comment_date">2015-10-01 23:07</span>
+					</span>
+				<a id="a_comment_author_3277745" href="http://www.cnblogs.com/jizhongjing/" target="_blank">静如秋叶</a> <a href="http://msg.cnblogs.com/send/%E9%9D%99%E5%A6%82%E7%A7%8B%E5%8F%B6" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</h4>
+			<p>
+				</p><div id="comment_body_3277745" class="blog_comment_body">楼主写的不错奥</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3277745,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3277745,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3277745_avatar" style="display:none;">http://pic.cnblogs.com/face/815984/20150925092417.png</span>
+				&nbsp;&nbsp;<span class="comment_actions"></span>
+			<p></p>
+		
+			<h4>
+				<a href="https://www.cnblogs.com/snandy/p/4773184.html#3353929" class="layer">#5楼</a><a name="3353929" id="comment_anchor_3353929"></a>
+					<span>
+						 <span class="comment_date">2016-01-25 17:36</span>
+					</span>
+				<a id="a_comment_author_3353929" href="http://www.cnblogs.com/surfaces/" target="_blank">surfaces</a> <a href="http://msg.cnblogs.com/send/surfaces" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</h4>
+			<p>
+				</p><div id="comment_body_3353929" class="blog_comment_body">var $=query = document.querySelector.bind(document);<br>var queryAll = document.querySelectorAll.bind(document);//最通用<br>var fromId = document.getElementById.bind(document);<br>var fromClass = document.getElementsByClassName.bind(document);<br>var fromTag = document.getElementsByTagName.bind(document);</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3353929,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3353929,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3353929_avatar" style="display:none;">http://pic.cnblogs.com/face/709182/20160511180001.png</span>
+				&nbsp;&nbsp;<span class="comment_actions"></span>
+			<p></p>
+		
+			<h4>
+				<a href="https://www.cnblogs.com/snandy/p/4773184.html#3353927" class="layer">#6楼</a><a name="3353927" id="comment_anchor_3353927"></a>
+					<span>
+						 <span class="comment_date">2016-01-25 17:37</span>
+					</span>
+				<a id="a_comment_author_3353927" href="http://www.cnblogs.com/surfaces/" target="_blank">surfaces</a> <a href="http://msg.cnblogs.com/send/surfaces" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</h4>
+			<p>
+				</p><div id="comment_body_3353927" class="blog_comment_body">bind 用法可已封装 选择器</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3353927,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3353927,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3353927_avatar" style="display:none;">http://pic.cnblogs.com/face/709182/20160511180001.png</span>
+				&nbsp;&nbsp;<span class="comment_actions"></span>
+			<p></p>
+		
+			<h4>
+				<a href="https://www.cnblogs.com/snandy/p/4773184.html#3586424" class="layer">#7楼</a><a name="3586424" id="comment_anchor_3586424"></a><span id="comment-maxId" style="display:none;">3586424</span><span id="comment-maxDate" style="display:none;">2016/12/21 17:13:53</span>
+					<span>
+						 <span class="comment_date">2016-12-21 17:13</span>
+					</span>
+				<a id="a_comment_author_3586424" href="http://home.cnblogs.com/u/75102/" target="_blank">不需此行</a> <a href="http://msg.cnblogs.com/send/%E4%B8%8D%E9%9C%80%E6%AD%A4%E8%A1%8C" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</h4>
+			<p>
+				</p><div id="comment_body_3586424" class="blog_comment_body">楼主写的赞 我竟然全看明白了 <br>请教一下 <br>有什么其他方法可以消除  that = this 这种绑定吗   call bind 等方式可能不适用<br>因为如下 看起来好像并不是所有的地方都可以用 bind 来解决<br><div class="cnblogs_Highlighter sh-gutter"><div><div id="highlighter_817363" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/snandy/p/4773184.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript keyword">this</code><code class="javascript plain">.set = </code><code class="javascript keyword">function</code> <code class="javascript plain">() {&nbsp; </code></div><div class="line number2 index1 alt1"><code class="javascript spaces">&nbsp;</code><code class="javascript comments">//原本想写&nbsp;&nbsp; </code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">$.each.call(</code><code class="javascript keyword">this</code><code class="javascript plain">,[1,2,3,4,5],</code><code class="javascript keyword">function</code> <code class="javascript plain">() { </code></div><div class="line number4 index3 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript comments">// 这里 this 应该是指向 拥有set 的实例 ，</code></div><div class="line number5 index4 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript comments">//而失去了原来$.each 原声绑定的 this 上下文</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">console.log(</code><code class="javascript keyword">this</code><code class="javascript plain">)</code><code class="javascript comments">// </code></div><div class="line number7 index6 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">})</code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript comments">//实际必须要写成&nbsp; </code></div><div class="line number10 index9 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">that = </code><code class="javascript keyword">this</code><code class="javascript plain">;</code></div><div class="line number11 index10 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">$.each([1,2,3,4,5],</code><code class="javascript keyword">function</code> <code class="javascript plain">() {&nbsp; </code></div><div class="line number12 index11 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">console.log(</code><code class="javascript keyword">this</code><code class="javascript plain">)</code><code class="javascript comments">//&nbsp; 1 </code></div><div class="line number13 index12 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">that =&nbsp; 拥有set 的实例 ，</code></div><div class="line number14 index13 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">})</code></div><div class="line number15 index14 alt2">&nbsp;</div><div class="line number16 index15 alt1"><code class="javascript plain">}</code></div></div></td></tr></tbody></table></div></div></div></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3586424,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3586424,&#39;Bury&#39;,this)">反对(0)</a></div>
+				&nbsp;&nbsp;<span class="comment_actions"></span>
+			<p></p>
+		
+</div><div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/snandy/p/4773184.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/snandy/p/4773184.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型工控、组态\仿真、建模CAD源码2018！</a><br><a href="https://cloud.tencent.com/solution/la?fromSource=gwzcw.766790.766790.766790" target="_blank">【推荐】微信小程序一站式部署 多场景模板定制</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="http://www.gcpowertools.com.cn/products/spreadjs/?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=SpreadJS2&amp;utm_campaign=community" target="_blank"><img width="300" height="250" src="./JavaScript中知而不全的this - snandy - 博客园_files/24442-20171206093644566-325426505.png" alt="SpreadJS2_1206"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/589986/" target="_blank">拍片网拍电影入局区块链，这项技术能给影视行业带来什么改变？</a><br> ·  <a href="https://news.cnblogs.com/n/589971/" target="_blank">Mozilla推出IoT解决方案, 巨头一如既往的希望建立标准</a><br> ·  <a href="https://news.cnblogs.com/n/589984/" target="_blank">红利殆尽，玩法分化，直播答题进入中场战事</a><br> ·  <a href="https://news.cnblogs.com/n/589988/" target="_blank">外卖配送员跟高铁赛跑：从商家出餐到旅客用餐不超2小时</a><br> ·  <a href="https://news.cnblogs.com/n/589977/" target="_blank">盛大游戏董事长王佶现身《对话》：用游戏传递快乐</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/34770/" target="_blank"><img width="468" height="60" src="./JavaScript中知而不全的this - snandy - 博客园_files/24442-20171208101900738-116140477.jpg" alt="阿里云C2-1208"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/586236/" target="_blank">领域驱动设计在互联网业务开发中的实践</a><br> ·  <a href="http://kb.cnblogs.com/page/585502/" target="_blank">步入云计算</a><br> ·  <a href="http://kb.cnblogs.com/page/531409/" target="_blank">以操作系统的角度述说线程与进程</a><br> ·  <a href="http://kb.cnblogs.com/page/141729/" target="_blank">软件测试转型之路</a><br> ·  <a href="http://kb.cnblogs.com/page/177402/" target="_blank">门内门外看招聘</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"><b>历史上的今天:</b><br>2012-09-01 <a href="http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html">JavaScript中__proto__与prototype的关系</a><br>2011-09-01 <a href="http://www.cnblogs.com/snandy/archive/2011/09/01/2162088.html">各浏览器中使用getAttribute获取checkbox/radio的checked值不同</a><br>2011-09-01 <a href="http://www.cnblogs.com/snandy/archive/2011/09/01/2155445.html">IE6/7不支持setAttribute设置style / 不支持getAttribute获取style属性值</a><br></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div id="rightmenu">
+	
+		
+<div id="my_links">
+<h3>导航</h3>
+<ul>
+<li><a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" href="http://www.cnblogs.com/snandy/">首页</a></li>
+<!--<li><a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>-->
+<li><a id="blog_nav_contact" rel="nofollow" href="https://msg.cnblogs.com/send/snandy">联系</a></li>
+<li></li><!---->
+<li><a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+</div>
+		<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/01/01&#39;);return false;">&lt;</a></td><td align="center">2018年2月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/03/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td class="CalWeekendDay" align="center">3</td></tr><tr><td class="CalWeekendDay" align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center">9</td><td class="CalWeekendDay" align="center">10</td></tr><tr><td class="CalWeekendDay" align="center">11</td><td align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td class="CalTodayDay" align="center">16</td><td class="CalWeekendDay" align="center">17</td></tr><tr><td class="CalWeekendDay" align="center">18</td><td align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td class="CalWeekendDay" align="center">24</td></tr><tr><td class="CalWeekendDay" align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td></tr><tr><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td><td class="CalOtherMonthDay" align="center">10</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+		
+<h3>公告</h3>
+<div class="newsItem">
+	<div id="blog-news">这里的文章多是工作中实际碰到问题记录，一次 bug 花了半天时间才搞定，为避免下次重蹈覆辙，记录之。时间原因博文部分为用心打磨，部分仅为临时记录。还有一些不正确老博文随着后续的认识会更正。如果对你有所帮助，请点下<a href="https://www.cnblogs.com/snandy/p/4773184.html#;" onclick="recc()">推荐</a>。<p id="snandyTip" style="color:red;display:none;">Thank you for your encouragement.</p>
+<style>
+#jobAD{outline:none;}
+#myDA {
+    -webkit-transition:-webkit-transform 4s linear;
+    -moz-transition:-moz-transform 4s linear;
+    -o-transition:-o-transform 4s linear;
+    transition:transform 4s linear;
+    -webkit-transform:scaleX(1) scaleY(1);
+    -moz-transform:scaleX(1) scaleY(1);
+    -ms-transform:scaleX(1) scaleY(1);
+    -o-transform:scaleX(1) scaleY(1);
+    transform:scaleX(1) scaleY(1);
+}
+.trans {
+    -webkit-transition:-webkit-transform 4s linear;
+    -moz-transition:-moz-transform 4s linear;
+    -o-transition:-o-transform 4s linear;
+    transition:transform 4s linear;
+    -webkit-transform:scaleX(1.1) scaleY(1.1);
+    -moz-transform:scaleX(1.1) scaleY(1.1);
+    -ms-transform:scaleX(1.1) scaleY(1.1);
+    -o-transform:scaleX(1.1) scaleY(1.1);
+    transform:scaleX(1.1) scaleY(1.1);
+}
+</style>
+<h4 style="color:red;display:none;">
+<a href="http://jdc.jd.com/archives/category/5-frontend" target="_blank">京东用户体验设计部</a> 招聘 <a href="https://www.lagou.com/jobs/1118135.html" target="_blank">前端工程师</a> 两名，简历请发送至 yfzhoutao#jd.com。
+</h4><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/snandy/">snandy</a><br>园龄：<a href="https://home.cnblogs.com/u/snandy/" title="入园时间：2010-02-04">8年</a><br>荣誉：<a href="https://www.cnblogs.com/expert/">推荐博客</a><br>粉丝：<a href="https://home.cnblogs.com/u/snandy/followers/">2767</a><br>关注：<a href="https://home.cnblogs.com/u/snandy/followees/">18</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;0c14c732-6311-df11-ba8f-001cf0cd104b&#39;)">+加关注</a></div><script>getFollowStatus('0c14c732-6311-df11-ba8f-001cf0cd104b')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>		
+		<div id="blog_stats">
+<div id="blog_stats">
+<h3>统计</h3>
+<ul>
+<li>随笔 - 449
+</li><li>文章 - 0
+</li><li>评论 - 1903
+<!--<li>引用 - 0-->
+</li>
+</ul>
+</div></div>
+		<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block"></div><div id="sidebar_categories">
+		<h3>随笔分类<span style="font-size:11px;font-weight:normal">(460)</span></h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/snandy/category/285215.html">Ajax/Fetch(24)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/snandy/category/285982.html">Algorithms(6)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/snandy/category/285207.html">Bug(28)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/snandy/category/285210.html">Compatibility(64)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/snandy/category/285204.html">CSS/LESS(11)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/snandy/category/285209.html">Data structures(2)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/snandy/category/301696.html">DOM/Event(29)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/snandy/category/533862.html">ECMAScript(16)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/snandy/category/285212.html">ExtJS(16)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/snandy/category/285214.html">HTML(11)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/snandy/category/778612.html">HTTP(1)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/snandy/category/285211.html">J2EE(2)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/snandy/category/285216.html">Java(4)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/snandy/category/285217.html">JavaScript(93)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/snandy/category/285213.html">jQuery(35)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_15" href="http://www.cnblogs.com/snandy/category/360589.html">Modular JS(17)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_16" href="http://www.cnblogs.com/snandy/category/482921.html">MVC(5)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_17" href="http://www.cnblogs.com/snandy/category/359556.html">Node(16)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_18" href="http://www.cnblogs.com/snandy/category/488673.html">Objective-C(1)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_19" href="http://www.cnblogs.com/snandy/category/428393.html">OS(17)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_20" href="http://www.cnblogs.com/snandy/category/285208.html">Patterns(6)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_21" href="http://www.cnblogs.com/snandy/category/424882.html">Perl(5)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_22" href="http://www.cnblogs.com/snandy/category/285205.html">Programming(14)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_23" href="http://www.cnblogs.com/snandy/category/428484.html">Regexp(3)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_24" href="http://www.cnblogs.com/snandy/category/285202.html">Tool(15)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_25" href="http://www.cnblogs.com/snandy/category/285206.html">Widget(19)</a> </li>
+			
+				</ul>
+			
+	
+		<h3>随笔档案<span style="font-size:11px;font-weight:normal">(449)</span></h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/snandy/archive/2017/04.html">2017年4月 (3)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/snandy/archive/2016/11.html">2016年11月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/snandy/archive/2016/09.html">2016年9月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/snandy/archive/2016/08.html">2016年8月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/snandy/archive/2016/07.html">2016年7月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/snandy/archive/2016/06.html">2016年6月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/snandy/archive/2016/04.html">2016年4月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/snandy/archive/2016/03.html">2016年3月 (5)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/snandy/archive/2016/01.html">2016年1月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/snandy/archive/2015/12.html">2015年12月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_10" href="http://www.cnblogs.com/snandy/archive/2015/11.html">2015年11月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_11" href="http://www.cnblogs.com/snandy/archive/2015/10.html">2015年10月 (6)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_12" href="http://www.cnblogs.com/snandy/archive/2015/09.html">2015年9月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_13" href="http://www.cnblogs.com/snandy/archive/2015/08.html">2015年8月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_14" href="http://www.cnblogs.com/snandy/archive/2015/07.html">2015年7月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_15" href="http://www.cnblogs.com/snandy/archive/2015/06.html">2015年6月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_16" href="http://www.cnblogs.com/snandy/archive/2015/05.html">2015年5月 (7)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_17" href="http://www.cnblogs.com/snandy/archive/2015/04.html">2015年4月 (3)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_18" href="http://www.cnblogs.com/snandy/archive/2015/01.html">2015年1月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_19" href="http://www.cnblogs.com/snandy/archive/2014/12.html">2014年12月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_20" href="http://www.cnblogs.com/snandy/archive/2014/11.html">2014年11月 (5)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_21" href="http://www.cnblogs.com/snandy/archive/2014/10.html">2014年10月 (4)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_22" href="http://www.cnblogs.com/snandy/archive/2014/09.html">2014年9月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_23" href="http://www.cnblogs.com/snandy/archive/2014/08.html">2014年8月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_24" href="http://www.cnblogs.com/snandy/archive/2014/07.html">2014年7月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_25" href="http://www.cnblogs.com/snandy/archive/2014/06.html">2014年6月 (4)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_26" href="http://www.cnblogs.com/snandy/archive/2014/05.html">2014年5月 (7)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_27" href="http://www.cnblogs.com/snandy/archive/2014/04.html">2014年4月 (3)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_28" href="http://www.cnblogs.com/snandy/archive/2014/03.html">2014年3月 (6)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_29" href="http://www.cnblogs.com/snandy/archive/2014/02.html">2014年2月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_30" href="http://www.cnblogs.com/snandy/archive/2014/01.html">2014年1月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_31" href="http://www.cnblogs.com/snandy/archive/2013/12.html">2013年12月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_32" href="http://www.cnblogs.com/snandy/archive/2013/11.html">2013年11月 (5)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_33" href="http://www.cnblogs.com/snandy/archive/2013/10.html">2013年10月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_34" href="http://www.cnblogs.com/snandy/archive/2013/09.html">2013年9月 (4)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_35" href="http://www.cnblogs.com/snandy/archive/2013/08.html">2013年8月 (5)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_36" href="http://www.cnblogs.com/snandy/archive/2013/07.html">2013年7月 (6)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_37" href="http://www.cnblogs.com/snandy/archive/2013/06.html">2013年6月 (4)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_38" href="http://www.cnblogs.com/snandy/archive/2013/05.html">2013年5月 (12)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_39" href="http://www.cnblogs.com/snandy/archive/2013/04.html">2013年4月 (3)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_40" href="http://www.cnblogs.com/snandy/archive/2013/03.html">2013年3月 (5)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_41" href="http://www.cnblogs.com/snandy/archive/2013/02.html">2013年2月 (4)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_42" href="http://www.cnblogs.com/snandy/archive/2013/01.html">2013年1月 (6)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_43" href="http://www.cnblogs.com/snandy/archive/2012/12.html">2012年12月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_44" href="http://www.cnblogs.com/snandy/archive/2012/11.html">2012年11月 (12)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_45" href="http://www.cnblogs.com/snandy/archive/2012/10.html">2012年10月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_46" href="http://www.cnblogs.com/snandy/archive/2012/09.html">2012年9月 (6)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_47" href="http://www.cnblogs.com/snandy/archive/2012/08.html">2012年8月 (2)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_48" href="http://www.cnblogs.com/snandy/archive/2012/06.html">2012年6月 (6)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_49" href="http://www.cnblogs.com/snandy/archive/2012/05.html">2012年5月 (15)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_50" href="http://www.cnblogs.com/snandy/archive/2012/04.html">2012年4月 (17)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_51" href="http://www.cnblogs.com/snandy/archive/2012/03.html">2012年3月 (21)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_52" href="http://www.cnblogs.com/snandy/archive/2012/02.html">2012年2月 (6)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_53" href="http://www.cnblogs.com/snandy/archive/2011/11.html">2011年11月 (1)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_54" href="http://www.cnblogs.com/snandy/archive/2011/10.html">2011年10月 (5)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_55" href="http://www.cnblogs.com/snandy/archive/2011/09.html">2011年9月 (16)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_56" href="http://www.cnblogs.com/snandy/archive/2011/08.html">2011年8月 (13)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_57" href="http://www.cnblogs.com/snandy/archive/2011/07.html">2011年7月 (8)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_58" href="http://www.cnblogs.com/snandy/archive/2011/06.html">2011年6月 (13)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_59" href="http://www.cnblogs.com/snandy/archive/2011/05.html">2011年5月 (14)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_60" href="http://www.cnblogs.com/snandy/archive/2011/04.html">2011年4月 (47)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_61" href="http://www.cnblogs.com/snandy/archive/2011/03.html">2011年3月 (90)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_62" href="http://www.cnblogs.com/snandy/archive/2011/02.html">2011年2月 (14)</a> </li>
+			
+				<li><a id="CatList_LinkList_1_Link_63" href="http://www.cnblogs.com/snandy/archive/2010/04.html">2010年4月 (1)</a> </li>
+			
+				</ul>
+			
+	
+		<h3>Friend</h3>
+		
+	</div><div id="sidebar_scorerank" class="sidebar-block">
+<h3>积分与排名</h3>
+<ul>
+	<li>
+		积分 -
+		816743
+	</li><li>
+		排名 -
+		105
+	</li>
+</ul>
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<h3 class="catListTitle">最新评论</h3>
+<div class="RecentComment" id="RecentComments">
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/snandy/p/3704218.html#3906443">1. Re:JavaScript获取图片的原始尺寸</a></li>
+        <li class="recent_comment_body">else { // IE6/7/8 var imgae = new Image() //错误 imgae =&gt; image image.src = img.sr......</li>
+        <li class="recent_comment_author">--小铁达子</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/snandy/archive/2012/05/04/2473057.html#3905486">2. Re:仅IE支持clearAttributes/mergeAttributes方法</a></li>
+        <li class="recent_comment_body">有支持火狐和google的类似的方法吗？</li>
+        <li class="recent_comment_author">--zlianh</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/snandy/p/4943138.html#3872082">3. Re:JavaScript数字精度丢失问题总结</a></li>
+        <li class="recent_comment_body">下面的写法更简单：...</li>
+        <li class="recent_comment_author">--a2631500</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/snandy/p/5278474.html#3868132">4. Re:ES5 对象的扩展(Object.preventExtensions)、密封(Object.seal)和冻结(Object.freeze)</a></li>
+        <li class="recent_comment_body">bucuo</li>
+        <li class="recent_comment_author">--_白马非马</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/snandy/archive/2011/06/03/2070266.html#3851079">5. Re:读jQuery之一(对象的组成)</a></li>
+        <li class="recent_comment_body">@IT民工磊边读源码，边调试代码。调试加深理解。...</li>
+        <li class="recent_comment_author">--snandy</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/snandy/archive/2011/06/03/2070266.html#3841216">6. Re:读jQuery之一(对象的组成)</a></li>
+        <li class="recent_comment_body">您好楼主，首先很喜欢您写的文档，其次问一下，这个Jquery 您是直接读源码理解还是参考些什么资料读，谢谢</li>
+        <li class="recent_comment_author">--IT民工磊</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/snandy/p/3589517.html#3833816">7. Re:JavaScript中奇葩的假值</a></li>
+        <li class="recent_comment_body">@广场上的青年‘’这个东西转换为布尔值后就是false，所以console.log(''==false)；本质上是执行了console.log(false==false);结果肯定为true......</li>
+        <li class="recent_comment_author">--小鑫先生</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/snandy/p/4892122.html#3810180">8. Re:微信公众账号开发入门</a></li>
+        <li class="recent_comment_body">请问这个难的，刚接触这个</li>
+        <li class="recent_comment_author">--紫泪QQ3079577974</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/snandy/archive/2012/03/04/2378109.html#3807518">9. Re:使用UglifyJS合并/压缩JavaScript</a></li>
+        <li class="recent_comment_body">定义完了buildOne这个方法，去哪调用呢</li>
+        <li class="recent_comment_author">--wy712</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/snandy/p/3589517.html#3804032">10. Re:JavaScript中奇葩的假值</a></li>
+        <li class="recent_comment_body">楼主有没有试过这样子的console.log(' ' == false)，单引号里面有一个空格，返回的结果却是真，不知道怎么回事。</li>
+        <li class="recent_comment_author">--广场上的青年</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<h3 class="catListTitle">阅读排行榜</h3>
+<div class="RecentComment" id="TopViewPosts"> 
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/snandy/archive/2012/05/22/2513652.html">1. RequireJS入门（一）(175724)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/11/13/2765381.html">2. Mac OS X中配置Apache(122478)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/04/04/2005156.html">3. JavaScript中清空数组的三种方式(93159)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/03/19/1988284.html">4. JavaScript声明全局变量三种方式的异同(78303)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/03/04/1970162.html">5. 判断JS对象是否拥有某属性(66256)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/05/23/2513712.html">6. RequireJS入门（二）(65187)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/04/07/2007717.html">7. 单例/单体模式(Singleton)(59480)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/03/13/1981611.html">8. 字符串转换成JSON的三种方式(57600)</a></li><li><a href="http://www.cnblogs.com/snandy/p/3704938.html">9. JavaScript判断图片是否加载完成的三种方式(56828)</a></li><li><a href="http://www.cnblogs.com/snandy/p/4093984.html">10. JavaScript选项卡/页签/Tab的实现(51491)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<h3 class="catListTitle">评论排行榜</h3>
+<div class="RecentComment" id="TopCommentsPosts">
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/snandy/archive/2011/03/06/1971764.html">1. JavaScript的写类方式（1）(41)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html">2. JavaScript中__proto__与prototype的关系(37)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/09/18/2669960.html">3. 坑爹的JS笔试题（持续更新）(34)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/03/01/1967628.html">4. 在循环中正确找到对应DOM元素的索引(34)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/03/25/1995003.html">5. 写了10年Javascript未必全了解的连续赋值运算(32)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/04/14/2015576.html">6. Javascript自由拖拽类(30)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/05/22/2513652.html">7. RequireJS入门（一）(24)</a></li><li><a href="http://www.cnblogs.com/snandy/p/3900016.html">8. 跨域iframe的高度自适应(24)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/03/01/2373237.html">9. JavaScript中函数声明优先于变量声明(23)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/05/24/2514700.html">10. RequireJS入门（三）(19)</a></li></ul></div>
+</div></div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/snandy/archive/2012/05/22/2513652.html">1. RequireJS入门（一）(57)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html">2. JavaScript中__proto__与prototype的关系(31)</a></li><li><a href="http://www.cnblogs.com/snandy/p/4934944.html">3. 前端开发调试线上代码的两款工具(29)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/04/14/2015576.html">4. Javascript自由拖拽类(28)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/03/01/1967628.html">5. 在循环中正确找到对应DOM元素的索引(25)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/03/06/1971764.html">6. JavaScript的写类方式（1）(24)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/05/24/2514700.html">7. RequireJS入门（三）(24)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/05/23/2513712.html">8. RequireJS入门（二）(24)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2011/06/03/2070266.html">9. 读jQuery之一(对象的组成)(23)</a></li><li><a href="http://www.cnblogs.com/snandy/archive/2012/03/30/2423612.html">10. JavaScript模块化开发库之SeaJS(23)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+        
+		
+<div id="footer">
+	Powered by: 
+	<br>
+	
+	<a id="Footer1_Hyperlink3" name="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br>
+	Copyright © snandy
+</div>
+	
+</div>			
+			
+	
+
+<!--PageEndHtml Block Begin-->
+<script>
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F1628f7c8d025473b441a8ba490edd441' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./JavaScript中知而不全的this - snandy - 博客园_files/h.js.下载" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=1628f7c8d025473b441a8ba490edd441" target="_blank"><img border="0" src="./JavaScript中知而不全的this - snandy - 博客园_files/21.gif" width="20" height="20"></a>
+<script>
+setTimeout(function(){
+//$('a').last().remove()
+}, 2000)
+</script>
+<!--PageEndHtml Block End-->
+
+
+</body></html>

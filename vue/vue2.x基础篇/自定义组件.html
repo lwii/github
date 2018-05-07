@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<div id="box">
+    <my-btn @total="allcoun()"></my-btn>
+    <my-btn @total="allcoun()"></my-btn>
+    <my-btn @total="allcoun()"></my-btn>
+    <my-btn @total="allcoun()"></my-btn>
+    <my-btn @total="allcoun()"></my-btn>
+    <my-btn @total="allcoun()"></my-btn>
+    <my-btn @total="allcoun()"></my-btn>
+    <p>总共点击了{{totalcoun}}次</p>
+</div>
+
+<template id="btn">
+    <button  @click="total()">你点击了{{coun}}次</button>
+</template>
+<script src="js/vue.js"></script>
+<script>
+    Vue.component("my-btn",{
+        template:"#btn",
+        data:function(){
+            return {
+                coun:0
+            }
+        },
+        methods:{
+          total:function(){
+              this.coun += 1;
+              //通知外界调用了这个方法
+              this.$emit("total");
+          }
+        },
+
+    });
+    new Vue({
+        el : "#box",
+        data:{
+            totalcoun:0,
+        },
+        methods:{
+            allcoun:function(){
+                this.totalcoun += 1;
+            }
+        }
+    });
+</script>
+<!--<body>
+<div id="box">
+    <my-login :username="user" :password="pass"></my-login>
+</div>
+
+<template id="user">
+    <div>
+        <span>{{user}}</span><input type="text"/>
+    </div>
+</template>
+
+<template id="pass">
+    <div>
+        <span>{{pass}}</span><input type="password"/>
+    </div>
+</template>
+
+<template id="login">
+    <div>
+        <my-user :user="username"></my-user>
+        <my-pass :pass="password"></my-pass>
+    </div>
+<script src="js/vue.js"></script>
+<script>
+    let User = Vue.extend({
+        template:"#user",
+        props:["user"]
+    });
+    let Pass = Vue.extend({
+        template:"#pass",
+        props:["pass"]
+    });
+    Vue.component("my-login",{
+        template:"#login",
+        props:["username","password"],
+        components:{
+            "my-user":User,
+            "my-pass":Pass
+        }
+    });
+    new Vue({
+        el : "#box",
+        data:{
+            user: "用户名:",
+            pass: "密 码:"
+        }
+    });
+</script>-->
+</body>
+</html>

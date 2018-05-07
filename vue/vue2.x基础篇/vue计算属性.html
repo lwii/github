@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="box">
+    <p>初始的值:{{name}}</p>
+    <p>翻转的值:{{name.split("").reverse().join("")}}</p>
+    <p>函数翻转:{{reverse()}}</p>
+    <p>计算方法:{{reverseStr}}</p>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el : "#box",
+        data:{
+            name: "Hello World"
+        },
+        methods:{
+          reverse:function(){
+            return this.name.split("").reverse().join("");
+          },
+        },
+        //计算方法
+        computed:{
+           //get方法获取
+            reverseStr:function(){
+                return this.name.split("").reverse().join("");
+            }
+        }
+    });
+</script>
+</body>
+</html>
