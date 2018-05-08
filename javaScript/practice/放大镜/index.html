@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            list-style: none;
+        }
+        #box {
+            width:1000px;
+            height:700px;
+            position:relative;
+            top:150px;
+            left:150px;
+        }
+        #box .content {
+            width:350px;
+            height:350px;
+            border: 1px solid #eee;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+        #box .content span {
+            width:100px;
+            height:100px;
+            background-color: rgba(225,225,0,0.2);
+            position: absolute;
+            left: 0;
+            top:0;
+            cursor: move;
+            display: none;
+        }
+        #box .bigContent {
+            width: 600px;
+            height:600px;
+            border: 1px solid #eee;
+            position:absolute;
+            top:0;
+            left:360px;
+            overflow:hidden;
+            display: none;
+        }
+        #box .bigContent img {
+            position: absolute;
+            top:0;
+            left:0;
+        }
+        #box .list {
+            width: 350px;
+            height:60px;
+            border: 1px solid red;
+            position:absolute;
+            top:360px;
+            left:0;
+            float: left;
+        }
+        #box .list ul {
+           float: left;
+        }
+    </style>
+    <script>
+        window.onload = () =>{
+            let content = document.querySelector(".content");
+            let imgContent = content.children[0];
+            let spanContent = content.children[1];
+            let bigContent = document.querySelector(".bigContent");
+            let imgBigContent = bigContent.children[0];
+            let imgList = document.querySelectorAll(".list img");
+             //鼠标移出后放大镜和大图显示出来
+            content.onmouseover = () => {
+                spanContent.style.display = "block";
+                bigContent.style.display = "block";
+
+                content.onmousemove = (event) => {
+                    let ev = event || window.event;
+                        //得到放大镜中心点的位子
+                    let spanX = ev.clientX - content.offsetParent.offsetLeft - spanContent.offsetWidth/2;
+                    let spanY = ev.clientY - content.offsetParent.offsetTop - spanContent.offsetHeight/2;
+                        //X轴边界检测
+                    if(spanX < 0 ){
+                        spanX = 0;
+                    }else if(spanX >= content.offsetWidth - spanContent.offsetWidth){
+                        spanX = content.offsetWidth - spanContent.offsetWidth;
+                    }
+                        //Y轴边界检测
+                    if(spanY < 0){
+                        spanY = 0;
+                    }else if(spanY >= content.offsetHeight - spanContent.offsetHeight){
+                        spanY = content.offsetHeight - spanContent.offsetHeight;
+                    }
+                    //console.log(- spanX / (content.offsetWidth / bigContent.offsetWidth));
+                    //移动放大镜
+                    spanContent.style.left = spanX + "px";
+                    spanContent.style.top = spanY + "px";
+
+                        //大图移动起来
+                    imgBigContent.style.left = - spanX / (content.offsetWidth / bigContent.offsetWidth) + 'px';
+                    imgBigContent.style.top = - spanY / (content.offsetHeight / bigContent.offsetHeight) + 'px';
+                };
+            };
+                //鼠标移出后放大镜和大图隐藏起来
+            content.onmouseout = () => {
+                spanContent.style.display = "none";
+                bigContent.style.display = "none";
+            };
+
+            //在.content中显示.list中遍历的图片
+                        //闭包的方式
+            for(var i=0; i<imgList.length; i++){
+                (function(i){
+                    imgList[i].onmouseover = () =>{
+                        imgContent.src = "img/00" + (i + 1) + ".jpg";
+                        imgBigContent.src = "img/000" + (i + 1) + ".jpg";
+                    }
+                })(i);
+            }
+                    //es6
+            /*for(let i=0; i<imgList.length; i++){
+                imgList[i].onmouseover = () =>{
+                    imgContent.src = "img/00" + (i + 1) + ".jpg";
+                    imgBigContent.src = "img/000" + (i + 1) + ".jpg";
+                }
+            }*/
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <div class="content">
+            <img src="img/001.jpg" alt=""/>
+            <span class="mask"></span>
+        </div>
+        <div class="bigContent">
+            <img src="img/0001.jpg" alt=""/>
+        </div>
+        <div class="list">
+                <img src="img/01.jpg" alt=""/>
+                <img src="img/02.jpg" alt=""/>
+                <img src="img/03.jpg" alt=""/>
+                <img src="img/04.jpg" alt=""/>
+                <img src="img/05.jpg" alt=""/>
+        </div>
+    </div>
+</body>
+</html>

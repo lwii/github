@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            list-style: none;
+        }
+        .list {
+            width: 350px;
+            height:60px;
+            position: relative;
+            top:150px;
+            left: 150px;
+            overflow: hidden;
+        }
+        .list span:nth-of-type(1){
+            width:22px;
+            height:32px;
+            background: url("img/prev.png");
+            position: absolute;
+            top:13px;
+            left:0;
+            color:#000;
+        }
+        .list span:nth-of-type(2){
+            width:22px;
+            height:32px;
+            background: url("img/next.png");
+            position: absolute;
+            top:13px;
+            right:0;
+            color:#000;
+        }
+        .list ul {
+            margin: 0 25px 0 25px;
+
+        }
+        .list ul li{
+            margin:5px;
+            float:left;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+
+        }
+    </script>
+</head>
+<body>
+<div class="list">
+    <span class="prev"></span>
+    <ul>
+        <li><img src="img/01.jpg" alt=""/></li>
+        <li><img src="img/02.jpg" alt=""/></li>
+        <li><img src="img/03.jpg" alt=""/></li>
+        <li><img src="img/04.jpg" alt=""/></li>
+        <li><img src="img/05.jpg" alt=""/></li>
+        <li> <img src="img/06.jpg" alt=""/></li>
+    </ul>
+    <span class="next"></span>
+</div>
+</body>
+</html>
