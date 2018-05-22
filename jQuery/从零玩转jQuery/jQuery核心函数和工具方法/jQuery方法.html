@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script text="text/javascript" src="../../jquery.js"></script>
+    <script>
+        $().ready(function(){
+        //js- forEach方法
+            /*var arr = [1,3,5,7,9];
+            var obj = {0:2,1:4,2:6,3:8,4:10};*/
+            /*arr.forEach(function(value,index){
+                console.log(index, value);
+            });*/
+            //obj.forEach(function(value,index){
+            //    console.log(index, value);//报错
+            //});
+            /*注意:原生JS的forEach只能遍历数组,不能遍历伪数组,
+            *          forEach(function(value,index){}:第一个参数是数组里面的值
+            *                                          第二个参数是数组里面的索引
+            *      jQuery中的each可以遍历数组和伪数组.
+            *           each(obj,callback(index,value))
+            *               obj:数组或者对象的名,
+            *               callback(index,value)
+            *                   (index)第一个参数是数组里面的索引
+            *                   (value)第二个参数是数组里面的值
+            * */
+        //jQuery - each方法
+            /*$.each(arr,function(index,value){
+                console.log(index, value);
+            });*/
+           /* var each1 = $.each(obj,function(index,value){
+                console.log(index, value);
+            });*/
+
+        //map方法- JS
+            /*arr.map(function(value,index,array){
+                console.log(index, value, array);
+            });*/
+            //obj.map(function(value,index,array){
+            //    console.log(index, value, array);  //error
+            //});
+            /*注意:原生JS的map只能遍历数组,不能遍历伪数组,
+             *           map(function(value,index,array){}):第一个参数是数组里面的值
+             *                                              第二个参数是数组里面的索引
+             *                                              第三个参数是当前被遍历的数组
+             *      jQuery中的map可以遍历数组和伪数组.
+             *           map(obj,callback(value,index))
+             *               obj:数组或者对象的名,
+             *               callback(index,value)
+             *                   (index)第一个参数是数组里面的索引
+             *                   (value)第二个参数是数组里面的值
+             * */
+        //map方法- JQuery
+            /*var map1 = $.map(obj,function(value,index){
+                console.log(index, value);
+            });*/
+    /*jQuery 中的each和map的静态方法的区别:
+        each   1:默认的返回值是遍历谁就返回谁.
+               2:不支持在回调函数中对遍历数组进行处理
+         map   1:默认返回值是一个空数组,
+               2:可以在回调函数中通过return对遍历的数组进行处理,然后生成一个新的数组返回
+     */
+            /*console.log(each1);
+            console.log(map1);*/
+
+//trim() 方法
+            /* trim(str):去除字符串两端的空格
+            *       参数:需要去除空格的字符串
+            *       返回值:去除空格之后的字符串*/
+            var str = "    lwii    ";
+            console.log("---" + str + "---");
+            var res = $.trim(str);
+            console.log("---" + res + "---");
+ //isWindow()方法: 判断传入的对象是否是window对象
+            //返回值:true/false: 是window对象/不是window对象
+ //isArray()方法: 判断传入的对象是否是真数组
+            //返回值:true/false: 是真数组/不是真数组
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #box {
+            width:300px;
+            height: 300px;
+            border: 10px solid #000;
+            margin: 50px;
+            position: relative;
+        }
+        .son {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            background: red;
+        }
+    </style>
+    <script src="../../jquery.js"></script>
+    <script>
+        $(function(){
+            /*$('div').css({
+                'width':'200px',
+                'height':'200px',
+            });
+
+            console.log($('div').width('300px'));
+            console.log($('div').height("300px"));
+            console.log($('div').innerHeight());*/
+
+//            $(".son").offset({
+//                top : 100,
+//                left : 200
+//            });
+//            console.log($("#box").offset().left);
+              console.log($(".son").offset().left);//获取目标距离浏览器窗口的偏移量
+            console.log($(".son").position().left);//获取目标距离父级元素的偏移量
+        });
+
+
+    </script>
+</head>
+<body>
+<div id="box">
+    <div class="son"></div>
+</div>
+</body>
+</html>

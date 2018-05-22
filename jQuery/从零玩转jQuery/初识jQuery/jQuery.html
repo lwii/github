@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../jquery.js"></script>
+    <script>
+        //原生js
+        window.onload = function(){
+            var yImg = document.querySelectorAll("img")[0];
+            console.log(yImg);
+            console.log(window.getComputedStyle(yImg).width);//图片的宽度280px
+        };
+        /*区别:
+            1:原生JS和jQuery入口函数的加载模式不同
+                    原生JS会等待DOM加载完毕并且图片也加载完毕才会执行
+                    jQuery会等到DOM元素加载完毕,但不会等到图片也加载完毕就会执行
+            2:原生的js的入口函数(window.onload = function(){})只能加载一次(后面的会覆盖前面编写的),
+               jQuery可以编写多个入口函数,后面的不会覆盖前面
+        * */
+
+        //jQuery
+        $(document).ready(function(){
+            var img = $("img");
+            console.log(img);
+
+            console.log(img.width());           //图片的宽度为0
+
+        });
+    </script>
+</head>
+<body>
+<img src="https://img.alicdn.com/tfscom/i4/1113866359/TB2tr1OlbBmpuFjSZFAXXaQ0pXa_!!1113866359.jpg_280x380xz.jpg" alt=""/>
+</body>
+</html>

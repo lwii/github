@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box {
+            width: 300px;
+            height: 450px;
+            border: 1px solid #000;
+            margin: 50px auto;
+        }
+        #box>h2 {
+            color: deeppink;
+            font-size: 20px;
+            margin : 5px 10px;
+        }
+        #box>ul>li {
+            border-top: 1px dashed #333;
+        }
+
+        #box>ul>li>span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: #999;
+            text-align: center;
+            margin: 5px 10px;
+        }
+        #box>ul>li:nth-child(-n + 3) span{
+            background: deeppink;
+        }
+        .movie {
+            overflow: hidden;
+            display: none;
+        }
+        #box>ul>li>.movie>img {
+            width: 100px;
+            height: 150px;
+            margin: 1px 10px;
+            float:left;
+        }
+        #box>ul>li>.movie>p {
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        .active .movie {
+            overflow: hidden;
+            display: block;
+        }
+    </style>
+    <script src="../../jquery.js"></script>
+    <script>
+        $(function(){
+            $("li").hover(function(){
+                $(this).addClass("active");
+            },function(){
+                $(this).removeClass("active");
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="box">
+    <h2>电影排行榜</h2>
+    <ul>
+        <li><span>1</span>红海行动
+            <div class="movie 1">
+                <img src="img/1.png" alt=""/>
+                <p>简介：索马里海域外，中国商船遭遇劫持，船员全数沦为阶下囚。蛟龙突击队沉着应对，潜商船进行突袭，成功解救全部人质。 返航途中，非洲北部伊维亚共和国发生政变，恐怖组织连同叛军攻入首都，海军战舰接到上级命令改变航向，
+                    前往执行撤侨任务。蛟龙突击队八，整装待发。</p>
+            </div>
+        </li>
+        <li><span>2</span>恶魔的后宫
+            <div class="movie 2">
+                <img src="img/2.png" alt=""/>
+                <p>作为远达建筑公司的副总监杨维（王健饰），工作上处处受到上级和同事的打压，家庭中妻子（王妍饰）对其也不尊重。各种的压迫下，导致杨维走上歧途。将周燕（吕小漫饰）、白亚楠（徐艺涵饰）、沈美玲（刘雨晴饰）分别抓到自己的地窖中，将其虐待......地窖外面，三位女性的亲人苦苦寻找</p>
+            </div>
+        </li>
+        <li><span>3</span>地下黑拳
+            <div class="movie 3">
+                <img src="img/3.png" alt=""/>
+                <p>在蒋师傅门下学拳的小凡，一心的在为全国武术比赛练习，而让他想不到的是，他的女朋友玲玲的哥哥陈思远对玲玲产生了色心，陈思远找到了在黑道心狠手辣的大飞，想要借大飞的手杀掉小凡，大飞看小凡的武术很厉害，想要靠小凡打黑拳捞一笔，大飞找到了小凡，小凡没有答应</p>
+            </div>
+        </li>
+        <li><span>4</span>勇敢者游戏:决战丛林
+            <div class="movie 4">
+                <img src="img/4.png" alt=""/>
+                <p>影片主要讲述了性格迥异的四人，因为共同的课后留校聚在一起，又因让人“远离世界之路”的“勇敢者的游戏”而产生命运纠葛，共同打破次元壁，经历一场考验勇气智慧，接受成长磨炼的冒险的故事。</p>
+            </div>
+        </li>
+        <li><span>5</span>唐人街探案2
+            <div class="movie 5">
+                <img src="img/5.png" alt=""/>
+                <p>秦风（刘昊然饰）接到唐仁（王宝强饰）的邀请来纽约参加其与阿香的婚礼。豪气逼人的唐仁迎接秦风，极尽招摇，岂料婚礼其实是唐仁为巨额奖金而参加的“世界名侦探大赛”，比赛的内容是寻找“唐人街教父”七叔的孙子。受骗的秦风怒极欲走，却被 FBI 探员陈英送来的讯息所吸。</p>
+            </div>
+        </li>
+        <li><span>6</span>黑豹
+            <div class="movie 6">
+                <img src="img/6.png" alt=""/>
+                <p>在漫威影业的影片《黑豹》中，特查拉在其父亲——前瓦坎达国王去世之后，回到了这个科技先进但与世隔绝的非洲国家，继任成为新一任“黑豹”及国王。当旧敌重现时，作为“黑豹”及国王的特查拉身陷两难境地，眼看着瓦坎达及全世界陷于危难之中。面对背叛与危险</p>
+            </div>
+        </li>
+        <li><span>7</span>捉妖记2
+            <div class="movie 7">
+                <img src="img/7.png" alt=""/>
+                <p>上一集与胡巴分别后，天荫带着小岚踏上寻父之路，在义薄云天的天师堂堂主云大哥的帮助下，二人得知天荫父亲宋戴天的护妖轨迹；而重回永宁村的胡巴再度被妖王追杀，颠沛流离逃亡时结识大赌徒屠四谷和一只妖怪，三人一起过着相依为命的生活</p>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #box {
+            width: 200px;
+            height: 200px;
+            border: 50px solid #000;
+            background: red;
+        }
+        .son {
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+    <script>
+        $(function(){
+//-----------------------事件绑定
+            /*事件绑定的两种方式
+            * 1:eventName(fn),编码效率高,但是部分jquery事件没有
+            * 2:on(eventName,fn)编码效率略低,支持所有事件.
+            *   注意:这两种都可以添加多个相同或者不同的事件,不会覆盖
+            * */
+            function test(){
+                alert("lwii");
+            }
+            $("button").click(test);
+            $("button").on("click",function(){
+                alert("sadf ");
+            });
+//------------------------事件解绑
+            /*off()
+            *     不传递参数会移除所有绑定事件$("button").off()
+            *     传递一个参数,会移除所有指定类型的事件,$("button").off("click");
+            *     传递两个参数,会移除所有指定类型的指定事件.$("button").off("click",test)
+            *     */
+//------------------------事件冒泡
+            $("#box").click(function(){
+                alert("我是父级标签box");
+            });
+            $(".son").click(function(event){
+                alert("son");       //事件冒泡:点击这个div后弹出两次,
+               // return false;       //阻止事件冒泡1
+                event.stopPropagation();//阻止事件冒泡2
+            });
+//------------------------事件默认行为
+            $("a").click(function(event){
+                alert("我是A标签");   //点击后弹出对话框,然后跳转到百度,这就是事件默认行为
+               // return false;       //阻止事件默认行为1:值弹出对话框.
+                event.preventDefault();//阻止事件默认行为1:值弹出对话框.
+            });
+//------------------------事件自动触发:trigger()
+           // $(".son").trigger("click");       //会触发事件冒泡和默认行为
+            //$(".son").triggerHandler("click");  //不会触发事件冒泡和默认行为
+
+//------------------------自定义事件
+            //满足条件: 1:事件必须是通过on来绑定的
+            //         2:事件必须通过trigger()来触发.
+            $(".son").on("myClick",function(){
+                alert("我是子元素son");
+            });
+            $(".son").trigger("myClick");
+        });
+    </script>
+</head>
+<body>
+<div id="box">
+    <div class="son"></div>
+</div>
+<a href="http://www.baidu.com">我是百度</a>
+
+<form action="http://www.taobao.com">
+    <input type="text"/>
+    <input type="submit"/>
+</form>
+<button>单击</button>
+</body>
+</html>

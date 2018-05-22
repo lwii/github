@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../jquery.js"></script>
+    <script>
+        $(function(){
+        //attr():获取或设置属性节点的值
+            console.log($("span").attr("class")); //attr(一个参数):获取属性节点的值,无论找到多少一个元素,都只会返回第一个元素指定的属性的节点的值
+            console.log($("span").attr("class", "box"));//attr(两个参数):设置属性节点的值,第一个参数是属性,第二个参数是值;找到多少个元素就会设置多少个元素
+            console.log($("span").attr("abc", "lwii"));//注意:如果设置的属性节点不存在,那么系统会自动新增
+        //removeAttr():删除属性节点
+            $("span").removeAttr("class");      //删除所有含有class属性的属性节点
+            $("span").removeAttr("class name");//删除所有含有class和name属性的属性节点
+        //prop():
+            $("span").eq(0).prop("dome","asd");
+            $("span").eq(1).prop("dome", "lwii");//prop(两个参数):设置属性节点的值,第一个参数是属性,第二个参数是值;
+            console.log($("span").prop("dome"));//prop(一个参数):获取属性节点的值,无论找到多少一个元素,都只会返回第一个元素指定的属性的节点的值
+        //removeProp():删除属性或属性节点
+            //同removeAttr();
+            console.log($("input").prop("checked")); //true/false: 选中/未选中
+            console.log($("input").attr("checked")); //checked/undefined :选中/未选中
+            //----------------注意:------------------//
+            //官方推荐:在操作属性节点时,具有true和false两个属性的属性节点,如CheckBox,selected,disabled使用prop().
+            //其他的使用attr().
+        })
+    </script>
+</head>
+<body>
+<span class="span1" name="wang"></span>
+<span class="span2" name="lwii"></span>
+
+<input type="checkbox" checked/>
+</body>
+</html>

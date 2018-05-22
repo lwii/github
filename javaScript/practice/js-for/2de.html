@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            
+        }
+    </style>
+</head>
+<body>
+<script>
+  /*  //2de n次幂
+   var num = parseInt(window.prompt("input"));
+   alert("2的" + num + "次幂是:" + Math.pow(2,num));
+
+    var cont = 1;
+    var first = 0;
+    var second = 1;
+    var third = 0;
+    for(var i = 2; i <= num; i++){
+        //n的阶乘
+        cont *= i;
+
+        //斐波纳挈数列的实现
+        third = first + second;
+        first = second;
+        second = third;
+        console.log(third);
+    }
+
+    alert(num + "的阶乘是:" + cont);*/
+
+
+    /*var str = window.prompt("请输入字符串:");
+    function calculationByte(str){
+        var count = 0;
+        for(var i = 0 ; i < str.length; i++){
+            if(str.charCodeAt(i) <= 255){
+                count++;
+            }else if(str.charCodeAt(i) > 255){
+                count += 2;
+            }
+        }
+        alert("您输入的字符串的字节长度是:" + count);
+    }
+  calculationByte(str);*/
+
+    function Person(){
+
+    }
+    Person.prototype.name = "lwii";
+    var person = new Person();
+    console.log(person.name);
+    Person.prototype.name = "wang";
+  console.log(person.name);
+
+</script>
+</body>
+</html>

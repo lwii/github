@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../jquery.js"></script>
+    <script>
+        $(function(){
+
+            var $btn = $("button")[0];
+            $btn.onclick = function(){
+                var $text = $("input")[0];
+                $("img").attr("src",$text.value);
+            }
+        })
+    </script>
+</head>
+<body>
+<input type="text" style="width: 500px"/>
+<button>点击我</button>
+<img src="https://www.baidu.com/img/superlogo_c4d7df0a003d3db9b65e9ef0fe6da1ec.png?where=super" alt=""/>
+</body>
+</html>

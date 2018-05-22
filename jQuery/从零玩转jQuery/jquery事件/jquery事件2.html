@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        .son {
+            width: 100px;
+            height: 100px;
+            background: greenyellow;
+        }
+    </style>
+
+    <script src="../../jquery.js"></script>
+    <script>
+        $(function(){
+//-----------------------事件委托
+            $("button").click(function(){
+                $("ul").append("<li>我是新添加的一个li</li>");
+            });
+//            $("ul>li").click(function(){
+//                alert($(this).html());
+//            });
+            $("ul").delegate("li","click",function(){
+                console.log($(this).html());
+            });
+//-----------------------鼠标事件
+//            $("#box").mouseover(function(){
+//                console.log("box鼠标移入了");
+//            });
+//            $("#box").mouseout(function(){
+//                console.log("box鼠标移出了");
+//            });
+            /*
+            * mouseover 和 mouseout:在父级元素下,移到子元素的时候也会触发鼠标移入移出事件
+            * mouseenter 和mouseleave:在父级元素下,移到子元素的时候不会触发鼠标移入移出事件
+            * 注意:一般企业开发中使用:mouseenter/mouseleave
+            * */
+           /* $("#box").mouseenter(function(){
+                console.log("box鼠标移入了");
+            });
+            $("#box").mouseleave(function(){
+                console.log("box鼠标移出了");
+            });*/
+            $("#box").hover(function(){
+                console.log("box鼠标移入了");
+            },function(){
+                console.log("box鼠标移出了");
+            });
+        });
+    </script>
+</head>
+<body>
+<ul>
+    <li>我是第一个li</li>
+    <li>我是第二个li</li>
+    <li>我是第三个li</li>
+</ul>
+<button>单击添加li</button>
+<div id="box">
+    <div class="son"></div>
+</div>
+</body>
+</html>
