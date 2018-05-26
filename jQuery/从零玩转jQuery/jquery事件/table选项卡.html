@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box {
+            width: 788px;
+            height: 490px;
+            border: 1px solid #000;
+            margin: 50px auto;
+            /*overflow: hidden;*/
+        }
+        .nav li {
+            float:left;
+            width: 197px;
+            height: 50px;
+            background: orange;
+            text-align: center;
+            line-height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .nav .active {
+            background: #ccc;
+        }
+        .photo li{
+            display: none;
+        }
+        .photo .show {
+            display: block;
+        }
+    </style>
+    <script src="../../jquery.js"></script>
+    <script>
+        $(function(){
+            /*$(".nav>li").hover(function(){
+                $(this).addClass("active");
+                $(".photo>li").eq($(this).index()).addClass("show");
+            },function(){
+                $(this).removeClass("active");
+                $(".photo>li").eq($(this).index()).removeClass("show");
+            });*/
+
+            $(".nav>li").mouseenter(function(){
+                $(this).addClass("active");   //选中后样式改变
+                $(this).siblings().removeClass("active"); //改变选中后当前标签的兄弟标签
+
+                $(".photo>li").eq($(this).index()).addClass("show");
+                $(".photo>li").eq($(this).index()).siblings().removeClass("show");
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="box">
+    <ul class="nav">
+        <li class="active">盯盯拍mix3</li>
+        <li>360行车记录仪</li>
+        <li>凌度行车记录仪</li>
+        <li>捷渡行车记录仪</li>
+    </ul>
+    <ul class="photo">
+        <li class="show"><img src="img/11.jpg" alt=""/></li>
+        <li><img src="img/12.jpg" alt=""/></li>
+        <li><img src="img/13.jpg" alt=""/></li>
+        <li><img src="img/14.jpg" alt=""/></li>
+    </ul>
+</div>
+</body>
+</html>

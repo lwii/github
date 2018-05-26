@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            background: url("img/bg.jpg") no-repeat center 0;
+        }
+        #nav {
+            width: 100%;
+            height: 50px;
+            background: url("img/nav.jpg") no-repeat;
+        }
+        #content {
+            width: 977px;
+            height: 1000px;
+            background: #ebdbd4;
+            margin: 10px auto;
+            overflow: hidden;
+        }
+        #content>.left {
+            float: left;
+        }
+        #content>.right {
+            float: left;
+        }
+        #content .content {
+            float: left;
+            width: 600px;
+            height: 200px;
+            background: url("img/comment.jpg") no-repeat;
+        }
+        .content>.comment {
+            width: 580px;
+            height: 77px;
+            margin-top: 37px;
+            margin-left: 10px;
+            resize: none;
+            outline: none;
+            /*border: none;*/
+        }
+        .content>.send {
+            width: 82px;
+            height: 30px;
+            background: #fd8040;
+            border: none;
+            margin-top: 1px;
+            margin-left: 509px;
+            color: #fff;
+        }
+        .content>.messageList {
+            width: 600px;
+            background: #fff;
+            float: left;
+            margin-top: 22px;
+        }
+        .content .info {
+            text-indent: 2em;
+            font-size: 14px;
+            padding: 10px 0;
+            border: 2px solid #ccc;
+            overflow: hidden;
+        }
+        .content .infoContent{
+            padding: 15px 15px;
+        }
+        .content .timeContent{
+            color: #ccc;
+        }
+        .content .time {
+            float: left;
+        }
+        .content .clear {
+            float: right;
+            margin-right: 30px;
+        }
+        .content .clear a {
+            text-decoration: none;
+            color: #ccc;
+            padding-left: 25px;
+
+        }
+        .content .clear a:nth-of-type(1){
+            background: url("img/praise.png") no-repeat 0 0;
+        }
+        .content .clear a:nth-of-type(2){
+            background: url("img/praise.png") no-repeat 0 0;
+        }
+        .content .clear a:nth-of-type(3){
+            background: url("img/delete.png") no-repeat 0 0;
+        }
+
+        #page {
+            width: 977px;
+            height: 40px;
+            background: red;
+            clear: both;
+        }
+    </style>
+    <script src="../../jquery.js"></script>
+    <script>
+        $(function(){
+            //监听内容输入
+            $("body").delegate(".comment","propertychange input",function(){
+                if($(this).val().length > 0){
+                    $(".send").prop("disabled",false);
+                }else{
+                    $(".send").prop("disabled",true);
+                }
+            });
+            /*
+            * 点击发布就动态的创建内容并发布
+            * */
+            $(".send").click(function(){
+                var $str = $(".comment").val();
+                var $weibo = createEle($str);
+                $(".messageList").prepend($weibo);
+                $(".comment").val("");
+            });
+            /*
+             * 点咱发布的内容
+             * */
+            $("body").delegate(".clearD","click",function(){
+                $(this).text(parseInt($(this).text()) + 1);
+            });
+            /*
+             * 踩发布的内容
+             * */
+            $("body").delegate(".clearC","click",function(){
+                $(this).text(parseInt($(this).text()) + 1);
+            });
+            /*
+             * 删除发布的内容
+             * */
+            $("body").delegate(".clearDel","click",function(){
+                var con = confirm(" 确认要删除这条微博吗？");
+                if(con){
+                    $(this).parents(".info").remove();
+                }
+            });
+            /*
+            * 创建节点的方法
+            **/
+            function createEle(str){
+                var $content = $(" <div class=\"info\">\n" +
+                                 "       <p class=\"infoContent\">"+ str +"</p>\n" +
+                                 "       <p class=\"timeContent\">\n" +
+                                 "           <span class=\"time\">"+ createTime()+"</span>\n" +
+                                 "           <span class=\"clear\">\n" +
+                                 "               <a href=\"javascript:;\" class=\"clearD\">0</a>\n" +
+                                 "               <a href=\"javascript:;\" class=\"clearC\">0</a>\n" +
+                                 "               <a href=\"javascript:;\" class=\"clearDel\">删除</a>\n" +
+                                 "           </span>\n" +
+                                 "       </p>\n" +
+                                 "  </div>");
+
+                return $content;
+            }
+            /*
+            * 创建生成时间的方法
+            */
+            function createTime(){
+                var date = new Date();
+                var arr = [ date.getFullYear() + "-",
+                            date.getMonth() + 1 + "-",
+                            date.getDate() + " ",
+                            date.getHours() + ":",
+                            date.getMinutes() + ":",
+                            date.getSeconds()];
+                return arr.join("");
+            }
+
+        });
+    </script>
+</head>
+<body>
+<div id="nav"></div>
+<div id="content">
+    <img src="img/left.jpg" alt="" class="left"/>
+    <div class="content">
+        <textarea class="comment"></textarea>
+        <input type="button" value="发布" class="send" disabled/>
+        <div class="messageList">
+
+        </div>
+    </div>
+    <img src="img/right.jpg" alt="" class="right"/>
+    <div id="page">
+        <a href="javascript:;">1</a>
+        <a href="javascript:;">2</a>
+        <a href="javascript:;">删除</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box {
+            width: 300px;
+            border: 1px solid #999;
+            margin: 50px auto;
+            -webkit-border-radius: 9px;
+            -moz-border-radius: 9px;
+            border-radius: 9px;
+        }
+        .first>li {
+            width: 300px;
+            border-bottom: 1px solid #666;
+            line-height: 40px;
+            text-indent: 2em;
+            position: relative;
+        }
+        .first>li>span {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background: url("img/arrow.png");
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .second {
+            display: none;
+        }
+        .second>li {
+            background: orange;
+            border-top: 1px solid #fff3d4;
+            text-indent: 4em;
+        }
+        .second>li:hover {
+            background: red;
+        }
+        .rotate {
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+        
+        /*下拉菜单*/
+        #drop {
+            width: 450px;
+            height: 50px;
+            border: 1px solid #ccc;
+            margin: 50px 0 0 50px;
+
+        }
+        .nav>li {
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #eeeeee;
+            float: left;
+            cursor: pointer;
+        }
+        .nav>li:hover {
+            background: #fff;
+
+        }
+        .navul {
+            display: none;
+        }
+        .navul>li {
+            height: 25px;
+            line-height: 25px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .navul:hover {
+            border-left: 1px solid #eeeeee;
+            border-right: 1px solid #eeeeee;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .navul>li:hover {
+            background: #eeeeee;
+        }
+    </style>
+    <script src="../../jquery.js"></script>
+    <script>
+        $(function(){
+//------------------------下拉菜单
+            /*
+            * 注意:在jQuery中如果要执行动画,建议在执行动画之前先调用stop方法,然后在执行动画
+            * */
+            $(".nav>li").hover(function(){
+                //得到二级菜单
+                var $navul = $(this).children(".navul");
+                //停止当前正在运行的动画
+                $navul.stop();
+                //展开二级菜单
+                $navul.slideDown(200);
+
+            },function(){
+                /*//得到二级菜单
+                var $navul = $(this).children(".navul");
+                //停止当前正在运行的动画
+                $navul.stop();
+                //展开二级菜单
+                $navul.slideUp(200);*/
+                $(this).children(".navul").stop().slideUp(200);
+            });
+
+//------------------------折叠菜单
+            $(".first>li").click(function(){
+                $(this).children(".second").slideDown("slow","linear");//设置当前点击菜单的class=".second"子菜单滑动显示
+                $(this).siblings().children(".second").slideUp(1000);//设置当前点击菜单得兄弟菜单的class=".second"子菜单滑动隐藏
+                $(this).children("span").addClass("rotate");//设置当前点击菜单的span子菜单箭头旋转90度
+                $(this).siblings().children("span").removeClass("rotate");//设置当前点击菜单的兄弟菜单的span子菜单箭头旋转还原
+            });
+        });
+    </script>
+</head>
+<body>
+<!--下拉菜单-->
+    <div id="drop">
+        <ul class="nav">
+            <li>我的淘宝
+                <ul class="navul">
+                    <li>安全设置</li>
+                    <li>个人资料</li>
+                    <li>我的足迹</li>
+                    <li>退出</li>
+                </ul>
+            </li>
+            <li>卖家中心
+                <ul class="navul">
+                    <li>免费开店</li>
+                    <li>卖家市场</li>
+                    <li>卖家中心</li>
+                    <li>友情链接</li>
+                    <li>卖出宝贝</li>
+                </ul>
+            </li>
+            <li>联系客服
+                <ul class="navul">
+                    <li>消费者客服</li>
+                    <li>卖家客服</li>
+                    <li>淘宝客服</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<!--折叠菜单-->
+    <div id="box">
+        <ul class="first">
+            <li>一级菜单<span></span>
+                <ul class="second">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul>
+            </li>
+            <li>一级菜单<span></span>
+                <ul class="second">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul>
+            </li>
+            <li>一级菜单<span></span>
+                <ul class="second">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul>
+            </li>
+            <li>一级菜单<span></span>
+                <ul class="second">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul>
+            </li>
+            <li>一级菜单<span></span>
+                <ul class="second">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul>
+            </li>
+            <li>一级菜单<span></span>
+                <ul class="second">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul>
+            </li>
+            <li>一级菜单<span></span>
+                <ul class="second">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul>
+            </li>
+            <li>一级菜单<span></span>
+                <ul class="second">
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                    <li>二级菜单</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

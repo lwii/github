@@ -1,0 +1,452 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+html,body {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+}
+/*
+    头部区域
+*/
+#header {
+    width: 100%;
+    height: 45px;
+    /*background: red;*/
+}
+#header .logo {
+    float: left;
+    margin-top: 12px;
+    margin-left: 30px;
+    opacity: 0.5;
+}
+
+#header .logo a {
+    display: inline-block;
+    width: 78px;
+    height: 21px;
+    background: url("../img/player_logo.png") no-repeat 0 0;
+}
+#header .register {
+    float: right;
+    line-height: 45px;
+}
+#header .register li {
+    float: left;
+    color: #ffffff;
+    margin-right: 20px;
+    opacity: 0.5;
+}
+#header .register li:hover, #header .logo:hover  {
+    opacity: 1;
+}
+/*
+    内容区域
+*/
+#content {
+    width: 100%;
+    height: 800px;
+    /*background: blue;*/
+}
+#content .content_in {
+    width: 1600px;
+    height: 800px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+#content .content_in .content_left {
+    width: 1200px;
+    height: 760px;
+    /*background: pink;*/
+    float: left;
+}
+/*收藏,添加,下载,删除栏*/
+.content_left .content_toolbar {
+    width: 100%;
+    height: 45px;
+    /*background: #000;*/
+}
+.content_toolbar span {
+    display: inline-block;
+    width: 122px;
+    height: 100%;
+    text-align: center;
+    color: #ffffff;
+    line-height: 45px;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    opacity: 0.5;
+    cursor: pointer;
+}
+.content_toolbar span:hover {
+    opacity: 1;
+}
+.content_toolbar span i {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background: url("../img/icon_sprite.png") no-repeat 0 0;
+    margin-right: 10px;
+    vertical-align: -5px;
+
+}
+.content_toolbar span:nth-child(1) i{
+    background-position: -60px -20px;
+}
+.content_toolbar span:nth-child(2) i{
+    background-position: -20px -20px;
+}
+.content_toolbar span:nth-child(3) i{
+    background-position: -40px -240px;
+}
+.content_toolbar span:nth-child(4) i{
+    background-position: -100px -20px;
+}
+.content_toolbar span:nth-child(5) i{
+    background-position: -40px -300px;
+}
+/*歌曲列表栏*/
+.content_left .content_list {
+    width: 100%;
+    height: 715px;
+    /*background: purple;*/
+    overflow: auto;
+}
+.content_left .content_list li {
+    width: 100%;
+    height: 50px;
+    /*background: orange;*/
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    opacity: 0.5;
+    color: #ffffff;
+    user-select: none;  /*none :文本不能被选择*/
+}
+.content_left .content_list li:hover {
+    opacity: 1;
+}
+.content_left .content_list li div {
+    float: left;
+    line-height: 50px;
+}
+.content_list .list_check {
+    width: 50px;
+    height: 100%;
+    text-align: center;
+}
+.content_list .list_check i {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #fff;
+}
+.content_list .list_checked i {
+    background: url("../img/icon_sprite.png") no-repeat -60px -80px;
+}
+.content_list .list_number {
+    width: 20px;
+    height: 100%;
+}
+.content_list .list_name {
+    width: 60%;
+    height: 100%;
+}
+.content_list .list_name .list_menu{
+    margin-top: 6px;
+    float: right;
+    margin-right: 20px;
+    display: none;
+
+}
+.list_menu a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: url("../img/icon_list_menu.png") no-repeat 0 0;
+    opacity: 0.5;
+}
+.list_menu a:hover {
+    opacity: 1;
+}
+.list_menu a:nth-child(1){
+    background-position: -120px 0;
+}
+.list_menu a:nth-child(2){
+    background-position: -120px -80px;
+}
+.list_menu a:nth-child(3){
+    background-position: -120px -120px;
+}
+.list_menu a:nth-child(4){
+    background-position: -120px -40px;
+}
+.content_list .list_singer {
+    width: 25%;
+    height: 100%;
+    /*background: navajowhite;*/
+}
+.content_list .list_time {}
+.content_list .list_time a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: url("../img/icon_list_menu.png") no-repeat -120px -160px;
+    margin-top: 6px;
+    float: left;
+    display: none;
+    opacity: 0.5;
+}
+.content_list .list_time a:hover {
+    opacity: 1;
+}
+    /*右边歌曲介绍栏*/
+#content .content_in .content_right {
+    width: 400px;
+    height: 760px;
+    /*background: maroon;*/
+    float: right;
+}
+.content_right .song_info {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 30px;
+}
+.song_info .song_info_pic {
+    display: inline-block;
+    background: url("../img/album_cover_player.png") no-repeat 0 0;
+    width: 201px;
+    height: 180px;
+    text-align: left;
+}
+.song_info .song_info_pic img{
+    width: 180px;
+    height: 180px;
+}
+.song_info div a {
+    text-decoration: none;
+    color: #ffffff;
+    opacity: 0.7;
+}
+.song_info div a:hover {
+    opacity: 1;
+}
+.content_right .song_lyrics {
+    margin-top: 150px;
+    text-align: center;
+}
+.song_lyrics li {
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 30px;
+    font-weight: bold;
+}
+.song_lyrics .cur{
+    color: #31c27c;
+}
+/*
+    底部区域
+*/
+#footer {
+    width: 100%;
+    height: 80px;
+    /*background: yellow;*/
+}
+#footer .footer_in {
+    width: 1600px;
+    height: 80px;
+    /*background: orange;*/
+    margin: 0 auto;
+}
+.footer_in a {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background: url("../img/player.png") no-repeat 0 0;
+    margin-right: 20px;
+}
+.footer_in .footer_music_prev {
+    width: 19px;
+    height: 20px;
+    background-position: 0 -30px;
+}
+.footer_in .footer_music_play {
+    width: 21px;
+    height: 29px;
+    background-position: 0 0;
+    vertical-align: -5px;
+}
+.footer_in .footer_music_play1 {
+    background-position: -30px 0;
+}
+.footer_in .footer_music_next {
+    width: 19px;
+    height: 20px;
+    background-position: 0 -52px;
+}
+.footer_in .footer_music_info {
+    display: inline-block;
+    width: 1040px;
+    height: 40px;
+    position: relative;
+    top: 5px;
+    margin-right: 30px;
+}
+.footer_music_info .footer_music_top {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    /*background: #000;*/
+    color: #ffffff;
+}
+.footer_music_top .footer_music_top_name {
+    float: left;
+    opacity: 0.5;
+}
+.footer_music_top .footer_music_top_time {
+    float: right;
+    opacity: 0.5;
+}
+.footer_music_top .footer_music_top_name:hover {
+    opacity: 1;
+}
+.footer_music_info .footer_music_bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.5);
+    margin-top: 5px;
+}
+.footer_music_bar .footer_music_line {
+    width: 100px;
+    height: 100%;
+    background: #FFF;
+}
+.footer_music_line .footer_music_dot {
+    width: 14px;
+    height: 14px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: #fff;
+    position: relative;
+    top: -5px;
+    left: 100px;
+}
+.footer_in .footer_music_mode {
+    width: 26px;
+    height: 25px;
+    background-position: 0 -205px;
+}
+.footer_in .footer_music_mode1 {
+    width: 23px;
+    height: 20px;
+    background-position: 0 -260px;
+}
+.footer_in .footer_music_mode2 {
+    width: 25px;
+    height: 19px;
+    background-position: 0 -74px;
+}
+.footer_in .footer_music_mode3 {
+    width: 26px;
+    height: 25px;
+    background-position: 0 -232px;
+}
+.footer_in .footer_music_fav {
+    width: 24px;
+    height: 21px;
+    background-position: 0 -96px;
+}
+.footer_in .footer_music_fav1 {
+    background-position: -30px -96px;
+}
+.footer_in .footer_music_down {
+    width: 22px;
+    height: 21px;
+    background-position: 0 -120px;
+}
+.footer_in .footer_music_comment {
+    width: 24px;
+    height: 24px;
+    background-position: 0 -400px;
+}
+.footer_in .footer_music_only {
+    width: 74px;
+    height: 24px;
+    background-position: 0 -283px;
+}
+.footer_in .footer_music_only1 {
+    background-position: 0 -312px;
+}
+.footer_in .footer_voice_info {
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    /*background: red;*/
+    position: relative;
+    top: 8px;
+}
+.footer_voice_info .footer_voice_icon {
+    width: 26px;
+    height: 21px;
+    background-position: 0 -144px;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+.footer_voice_info .footer_voice_bar {
+    width: 70px;
+    height: 4px;
+    background: rgba(255,255,255,0.5);
+    position: absolute;
+    top: 18px;
+    right: 0;
+}
+.footer_voice_bar .footer_voice_line {
+    width: 35px;
+    height: 100%;
+    background: #FFF;
+}
+.footer_voice_line .footer_voice_dot {
+    width: 14px;
+    height: 14px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: #fff;
+    position: relative;
+    top: -5px;
+    left: 35px;
+}
+/*
+    把歌曲图片高度模糊后作为最底层背景图
+*/
+#mask_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    background: url("../img/12.jpg") no-repeat 0 0;
+    background-size: cover;
+    filter: blur(100px);
+}
+/*
+    次底层大灰色屏幕遮罩
+*/
+#mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+}
+._mCS_1 .mCSB_dragger .mCSB_dragger_bar {
+    width: 10px;
+    background-color: #000;
+}
