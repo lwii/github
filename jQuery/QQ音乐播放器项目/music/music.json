@@ -1,0 +1,129 @@
+[
+  {
+    "name": "爱情没那么美",
+    "singer": "张玮伽",
+    "album":"不甘寂寞",
+    "time":"05:01",
+    "link_url":"./music/爱情没那么美.mp3",
+    "cover":"./music/爱情没那么美.jpg",
+    "link_lrc":"./music/爱情没那么美.txt"
+  },
+  {
+    "name": "那滋味",
+    "singer": "群星",
+    "album":"3D顶级女声,极致立体特效",
+    "time":"05:06",
+    "link_url":"./music/那滋味.mp3",
+    "cover":"./music/那滋味.jpg",
+    "link_lrc":"./music/那滋味.txt"
+  },
+  {
+    "name": "饿狼传说",
+    "singer": "胡琳",
+    "album":"Jazz Them Up Once More",
+    "time":"04:31",
+    "link_url":"./music/饿狼传说.mp3",
+    "cover":"./music/饿狼传说.jpg",
+    "link_lrc":"./music/饿狼传说.txt"
+  },
+  {
+    "name": "红昭愿",
+    "singer": "洛天依/音阙诗听",
+    "album":"洛天依作品集",
+    "time":"02:53",
+    "link_url":"./music/红昭愿.mp3",
+    "cover":"./music/红昭愿.jpg",
+    "link_lrc":"./music/红昭愿.txt"
+  },
+  {
+    "name": "I Just Wanna Run",
+    "singer": "Kait Weston",
+    "album":"I Just Wanna Run",
+    "time":"03:09",
+    "link_url":"./music/I Just Wanna Run.mp3",
+    "cover":"./music/I Just Wanna Run.jpg",
+    "link_lrc":"./music/I Just Wanna Run.txt"
+  },
+  {
+    "name": "算你狠",
+    "singer": "群星",
+    "album":"车载高清音乐1:流行沸点",
+    "time":"04:34",
+    "link_url":"./music/算你狠.mp3",
+    "cover":"./music/算你狠.jpg",
+    "link_lrc":"./music/算你狠.txt"
+  },
+  {
+    "name": "Havana",
+    "singer": "Owen Keith",
+    "album":"Havana(3D节奏环绕)",
+    "time":"03:12",
+    "link_url":"./music/Havana.mp3",
+    "cover":"./music/Havana.jpg",
+    "link_lrc":"./music/Havana.txt"
+  },
+  {
+    "name": "下个路口见",
+    "singer": "常石磊",
+    "album":"常石磊合集",
+    "time":"03:41",
+    "link_url":"./music/下个路口见.mp3",
+    "cover":"./music/下个路口见.jpg",
+    "link_lrc":"./music/下个路口见.txt"
+  },
+  {
+    "name": "潮湿的心",
+    "singer": "龚玥",
+    "album":"微风拂面",
+    "time":"05:15",
+    "link_url":"./music/潮湿的心.mp3",
+    "cover":"./music/潮湿的心.jpg",
+    "link_lrc":"./music/潮湿的心.txt"
+  },
+  {
+    "name": "龙的传人",
+    "singer": "后炫",
+    "album":"一生所爱 大地飞歌",
+    "time":"02:50",
+    "link_url":"./music/龙的传人.mp3",
+    "cover":"./music/龙的传人.jpg",
+    "link_lrc":"./music/龙的传人.txt"
+  },
+  {
+    "name": "Anymotion",
+    "singer": "李孝利/ Eric",
+    "album":"李孝利",
+    "time":"03:31",
+    "link_url":"./music/Anymotion.mp3",
+    "cover":"./music/Anymotion.jpg",
+    "link_lrc":"./music/Anymotion.txt"
+  },
+  {
+    "name": "夜色",
+    "singer": "梁建东",
+    "album":"夜色",
+    "time":"06:01",
+    "link_url":"./music/夜色.mp3",
+    "cover":"./music/夜色.jpg",
+    "link_lrc":"./music/夜色.txt"
+  },
+  {
+    "name": "小半",
+    "singer": "凝羽",
+    "album":"翻唱",
+    "time":"04:57",
+    "link_url":"./music/小半.mp3",
+    "cover":"./music/小半.jpg",
+    "link_lrc":"./music/小半.txt"
+  },
+  {
+    "name": "如果爱下去",
+    "singer": "群星",
+    "album":"汽车专用极品大碟之绝对流行",
+    "time":"04:24",
+    "link_url":"./music/如果爱下去.mp3",
+    "cover":"./music/如果爱下去.jpg",
+    "link_lrc":"./music/如果爱下去.txt"
+  }
+
+]

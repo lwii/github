@@ -9,12 +9,11 @@ html,body {
     font-size: 14px;
 }
 /*
-    Í·²¿ÇøÓò
+    å¤´éƒ¨
 */
 #header {
     width: 100%;
     height: 45px;
-    /*background: red;*/
 }
 #header .logo {
     float: left;
@@ -43,12 +42,11 @@ html,body {
     opacity: 1;
 }
 /*
-    ÄÚÈİÇøÓò
+    å†…å®¹éƒ¨åˆ†
 */
 #content {
     width: 100%;
     height: 800px;
-    /*background: blue;*/
 }
 #content .content_in {
     width: 1600px;
@@ -59,14 +57,12 @@ html,body {
 #content .content_in .content_left {
     width: 1200px;
     height: 760px;
-    /*background: pink;*/
     float: left;
 }
-/*ÊÕ²Ø,Ìí¼Ó,ÏÂÔØ,É¾³ıÀ¸*/
+/*å†…å®¹å·¦ä¾§å¯¼èˆªå·¥å…·æ éƒ¨åˆ†*/
 .content_left .content_toolbar {
     width: 100%;
     height: 45px;
-    /*background: #000;*/
 }
 .content_toolbar span {
     display: inline-block;
@@ -110,28 +106,22 @@ html,body {
 .content_toolbar span:nth-child(5) i{
     background-position: -40px -300px;
 }
-/*¸èÇúÁĞ±íÀ¸*/
+/*ä¸»é¡µå·¦ä¾§æ çš„æ­Œæ›²åˆ—è¡¨éƒ¨åˆ†*/
 .content_left .content_list {
     width: 100%;
     height: 715px;
-    /*background: purple;*/
     overflow: auto;
 }
 .content_left .content_list li {
     width: 100%;
     height: 50px;
-    /*background: orange;*/
     border-bottom: 1px solid rgba(255,255,255,0.05);
-    opacity: 0.5;
-    color: #ffffff;
-    user-select: none;  /*none :ÎÄ±¾²»ÄÜ±»Ñ¡Ôñ*/
-}
-.content_left .content_list li:hover {
-    opacity: 1;
+    user-select: none;  /*none :ç¦æ­¢ç”¨æˆ·é€‰æ‹©æ–‡æœ¬*/
 }
 .content_left .content_list li div {
     float: left;
     line-height: 50px;
+    color: rgba(255, 255, 255, 0.5);
 }
 .content_list .list_check {
     width: 50px;
@@ -143,13 +133,22 @@ html,body {
     width: 14px;
     height: 14px;
     border: 1px solid #fff;
+    opacity: 0.5;
 }
 .content_list .list_checked i {
+    opacity: 1;
     background: url("../img/icon_sprite.png") no-repeat -60px -80px;
+}
+.content_list .list_check i:hover {
+    opacity: 1;
 }
 .content_list .list_number {
     width: 20px;
     height: 100%;
+}
+.content_list .list_number1 {
+    color: transparent !important;
+    background: url("../img/wave.gif") 0 50% no-repeat;
 }
 .content_list .list_name {
     width: 60%;
@@ -184,10 +183,12 @@ html,body {
 .list_menu a:nth-child(4){
     background-position: -120px -40px;
 }
+.list_menu .list_menu_play1 {
+    background-position: -80px -200px !important;
+}
 .content_list .list_singer {
     width: 25%;
     height: 100%;
-    /*background: navajowhite;*/
 }
 .content_list .list_time {}
 .content_list .list_time a {
@@ -203,12 +204,12 @@ html,body {
 .content_list .list_time a:hover {
     opacity: 1;
 }
-    /*ÓÒ±ß¸èÇú½éÉÜÀ¸*/
+    /*å†…å®¹å³ä¾§éƒ¨åˆ†*/
 #content .content_in .content_right {
     width: 400px;
     height: 760px;
-    /*background: maroon;*/
     float: right;
+    user-select: none;
 }
 .content_right .song_info {
     text-align: center;
@@ -235,29 +236,30 @@ html,body {
     opacity: 1;
 }
 .content_right .song_lyrics {
-    margin-top: 150px;
+    margin-top: 80px;
     text-align: center;
+    height: 300px;
+    overflow: hidden;
 }
 .song_lyrics li {
     color: rgba(255, 255, 255, 0.5);
-    line-height: 30px;
+    line-height: 33px;
+    font-size: 15px;
     font-weight: bold;
 }
 .song_lyrics .cur{
     color: #31c27c;
 }
 /*
-    µ×²¿ÇøÓò
+    é¡µé¢åº•éƒ¨
 */
 #footer {
     width: 100%;
     height: 80px;
-    /*background: yellow;*/
 }
 #footer .footer_in {
     width: 1600px;
     height: 80px;
-    /*background: orange;*/
     margin: 0 auto;
 }
 .footer_in a {
@@ -298,16 +300,17 @@ html,body {
     width: 100%;
     height: 30px;
     line-height: 30px;
-    /*background: #000;*/
     color: #ffffff;
 }
 .footer_music_top .footer_music_top_name {
     float: left;
     opacity: 0.5;
+    user-select: none;
 }
 .footer_music_top .footer_music_top_time {
     float: right;
     opacity: 0.5;
+    user-select: none;
 }
 .footer_music_top .footer_music_top_name:hover {
     opacity: 1;
@@ -316,10 +319,10 @@ html,body {
     width: 100%;
     height: 4px;
     background: rgba(255,255,255,0.5);
-    margin-top: 5px;
+    position: relative;
 }
 .footer_music_bar .footer_music_line {
-    width: 100px;
+    width: 0;
     height: 100%;
     background: #FFF;
 }
@@ -330,9 +333,9 @@ html,body {
     -moz-border-radius: 50%;
     border-radius: 50%;
     background: #fff;
-    position: relative;
+    position: absolute;
     top: -5px;
-    left: 100px;
+    left: 0;
 }
 .footer_in .footer_music_mode {
     width: 26px;
@@ -384,7 +387,6 @@ html,body {
     display: inline-block;
     width: 100px;
     height: 40px;
-    /*background: red;*/
     position: relative;
     top: 8px;
 }
@@ -395,6 +397,9 @@ html,body {
     position: absolute;
     top: 10px;
     left: 0;
+}
+.footer_voice_info .footer_voice_icon1 {
+    background-position: 0 -182px;
 }
 .footer_voice_info .footer_voice_bar {
     width: 70px;
@@ -421,7 +426,7 @@ html,body {
     left: 35px;
 }
 /*
-    °Ñ¸èÇúÍ¼Æ¬¸ß¶ÈÄ£ºıºó×÷Îª×îµ×²ã±³¾°Í¼
+    æœ€åº•å±‚èƒŒæ™¯å›¾,æ¨¡ç³Šå¤„ç†
 */
 #mask_bg {
     position: absolute;
@@ -435,7 +440,7 @@ html,body {
     filter: blur(100px);
 }
 /*
-    ´Îµ×²ã´ó»ÒÉ«ÆÁÄ»ÕÚÕÖ
+    æ¬¡åº•å±‚å¹•å¸ƒ
 */
 #mask {
     position: absolute;
