@@ -30,6 +30,8 @@
                 selector = lwjQuery.trim(selector);
                 if(!selector){                                      //传入'',null undefined NaN 0 false.返回空的lwjQuery对象
                     return true;
+                }else if(lwjQuery.isFunction(selector)){
+                    
                 }else if(lwjQuery.isString(selector)){              //传入2:字符串
                     //判断是否是代码片段
                     if(lwjQuery.isHTML(selector)){
@@ -44,22 +46,22 @@
                         this.length = temp.children.length;*/
                         [].push.apply(this,temp.children);//优化第二步好和第三步
                         //4,返回加工好的this(jquery)
-                        return this;
+                        //return this;
                     }else{                                  //判断是否是选择器
                         //1,根据传入的选择器找到对应的元素
                         var reg = document.querySelectorAll(selector);
                         //2将找到的元素添加到 lwjQuery上去
                         [].push.apply(this,reg);
                         //3返回加工好的lwjquery(this)
-                        return this;
+                        //return this;
                     }
                 }else if(lwjQuery.isArray(selector)){                 ////传入2:数组
                     //1,将自定义的伪数组转换为真数组
-                    var arr = [].slice.call(selector);
-                    //2,将真数组转换为伪数组
+                    var arr = [].slice.call(selector);      
+                     //2,将真数组转换为伪数组
                     [].push.apply(this,arr);
-                    return this;
-                    /*//真数组
+                    // return this;
+                   /*  //真数组
                     if(({}).toString.apply(selector) === "[object Array]"){
                         [].push.apply(this,selector);
                         return this;
@@ -70,15 +72,18 @@
                         //2,将真数组转换为伪数组
                         [].push.apply(this,arr);
                         return this;
-                    }*/
+                    } */
+                }else{                                      //其他类型数据
+                    this[0] = selector;
+                    this.length = 1;
+                    //return this;
                 }
-
-
+                return this;
             }
         };
         //创建判断传入的参数是否是window的方法
         lwjQuery.isWindow = function(obj){
-            return obj === window;
+            return obj !== window;
         };
         //创建判断传入的参数是否是object的方法
         lwjQuery.isObject = function(obj){
@@ -86,11 +91,15 @@
         };
         //创建判断传入的参数是否是数组的方法
         lwjQuery.isArray = function(obj){
-           if(typeof lwjQuery.isObject(obj) && "length" in obj && lwjQuery.isWindow(obj)){
+           if(lwjQuery.isObject(obj) && "length" in obj && lwjQuery.isWindow(obj)){
                return true;
            }else{
                return false;
            }
+        };
+        //创建判断传入的参数是否是函数的方法
+        lwjQuery.isFunction(fn){
+            return typeof fn === "function";
         };
         //创建判断传入的参数是否是字符串的方法
         lwjQuery.isString = function (str){
@@ -99,7 +108,7 @@
         //创建判断是否是代码片段的方法
         lwjQuery.isHTML = function(str){
             return str.charAt(0) == "<" && str.charAt(str.length-1) == ">" && str.length >= 3;
-        };
+        };        
         //创建去除字符串头尾空格的方法
         lwjQuery.trim = function(str){
             if(!(lwjQuery.isString(str))){
