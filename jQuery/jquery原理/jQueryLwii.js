@@ -30,8 +30,7 @@
                 selector = lwjQuery.trim(selector);
                 if(!selector){                                      //传入'',null undefined NaN 0 false.返回空的lwjQuery对象
                     return true;
-                }else if(lwjQuery.isFunction(selector)){
-                    
+                }else if(lwjQuery.isFunction(selector)){                    
                 }else if(lwjQuery.isString(selector)){              //传入2:字符串
                     //判断是否是代码片段
                     if(lwjQuery.isHTML(selector)){
